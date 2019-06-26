@@ -3,6 +3,16 @@
     <string name="user">Usuario</string>
     <string name="password">Contraseña</string>
     <string name="logIn">Iniciar sesión</string>
-    <string name="clickHereToCreate">Pulsar aquí para crear cuenta</string>
+    <string name="clickHereToCreate">¿Necesitas cuenta? Regístrate aquí</string>
+
+    <string name="createUserAccount">Registrarse</string>
+    <string name="email">Email</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="repatPassword">Vuelve a escribir la contraseña</string>
+    <string name="name">Nombre</string>
+    <string name="firstName">Primer apellido</string>
+    <string name="secondName">Segundo apellido</string>
+    <string name="signup">Registrarse</string>
+    <string name="createAccount">Crear cuenta</string>
 
 </resources>

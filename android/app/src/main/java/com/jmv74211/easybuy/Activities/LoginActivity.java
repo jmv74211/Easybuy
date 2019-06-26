@@ -1,4 +1,4 @@
-package com.jmv74211.easybuy;
+package com.jmv74211.easybuy.Activities;
 
 import android.content.Intent;
 import android.os.Build;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import com.jmv74211.easybuy.R;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -29,7 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         this.registerText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplication(), RegisterActivity.class);
+                startActivity(intent);
             }
         });
 
