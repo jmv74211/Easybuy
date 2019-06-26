@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">EasyBuy</string>
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="logIn">Iniciar sesión</string>
+    <string name="clickHereToCreate">Pulsar aquí para crear cuenta</string>
+
+</resources>

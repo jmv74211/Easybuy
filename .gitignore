@@ -34,6 +34,10 @@ captures/
 
 # IntelliJ
 *.iml
+<<<<<<< HEAD
+=======
+.idea/
+>>>>>>> Creación del proyecto. Añade primera actividad de login básica
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/gradle.xml
