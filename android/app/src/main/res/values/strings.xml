@@ -15,4 +15,22 @@
     <string name="signup">Registrarse</string>
     <string name="createAccount">Crear cuenta</string>
 
+    <string name="usernameDrawer">\@Nombre usuario</string>
+    <string name="navigationDrawerOpen">Abrir drawer</string>
+    <string name="navigationDrawerClose">Cerrar drawer</string>
+    <string name="myProfile">Mi perfil</string>
+    <string name="exit">Salir</string>
+    <string name="logOut">Cerrar sesión</string>
+
+
+    <string name="myList">Mis listas</string>
+
+    <string name="nameList">Nombre de la lista</string>
+    <string name="participantsShoppingList">Participantes de la lista</string>
+    <string name="createList">Crear lista</string>
+
+    <string name="inProcess">En proceso.</string>
+    <string name="CreatingShoppingList">Creando lista de la compra...</string>
+    <string name="fieldRequired">Este campo es obligatorio</string>
+
 </resources>

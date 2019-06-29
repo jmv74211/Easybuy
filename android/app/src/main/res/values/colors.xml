@@ -4,4 +4,25 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="white">#FFFFFF</color>
+
+    <color name="yellow"> #fff176</color>
+    <color name="darkYellow">#ffee58</color>
+    <color name="lightYellow">#fff59d</color>
+
+    <!-- USER BORDER SHOPPINGLIST -->
+
+    <color name="cblue"> #64b5f6</color>
+    <color name="cred"> #ef5350</color>
+    <color name="cpurple"> #ab47bc</color>
+    <color name="cdarkBLue"> #5c6bc0</color>
+    <color name="cCyan"> #4dd0e1</color>
+    <color name="cGreen"> #81c784</color>
+    <color name="cLime"> #dce775</color>
+    <color name="cOrange"> #ffb74d</color>
+    <color name="cBrown"> #a1887f</color>
+    <color name="cYellow"> #fff176</color>
+
+
+
+
 </resources>
