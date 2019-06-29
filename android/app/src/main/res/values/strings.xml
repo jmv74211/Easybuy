@@ -33,7 +33,7 @@
     <string name="creatingUser">Creando usuario...</string>
     <string name="CreatingShoppingList">Creando lista de la compra...</string>
 
-    <!-- ERROS REGISTRO -->
+    <!-- ERRORES REGISTRO -->
     <string name="fieldRequired">Este campo es obligatorio</string>
     <string name="emailAlreadyRegistered">El email ya está registrado</string>
     <string name="passwordLengthError">La longitud mínima son 6 caracteres</string>
@@ -43,5 +43,9 @@
     <string name="errorRegister">Ups, ha habido un error y el usuario no se ha podido crear</string>
     <string name="errorUsernameLength">El usuario debe de tener entre 4 y 10 caracteres</string>
     <string name="errorCreateUser">Error al crear usuario</string>
+
+    <string name="errorReadingUserInfo">Error al cargar los datos del usuario</string>
+    <string name="conecting">Conectando...</string>
+    <string name="loginError">Error, credenciales incorrectas</string>
 
 </resources>

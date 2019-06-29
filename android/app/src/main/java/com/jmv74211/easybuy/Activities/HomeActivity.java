@@ -12,11 +12,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.jmv74211.easybuy.Adapters.ShoppingListAdapter;
+import com.jmv74211.easybuy.Data.CurrentUserInfo;
 import com.jmv74211.easybuy.Data.Data;
 import com.jmv74211.easybuy.POJO.ShoppingList;
 import com.jmv74211.easybuy.R;
@@ -33,6 +36,10 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
     private ArrayList<ShoppingList> shoppingList;
 
     private ShoppingListAdapter adapter;
+
+    private static CurrentUserInfo currentUserInfo;
+
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
     @Override
@@ -62,6 +69,7 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
             }
         });
 
+        currentUserInfo = CurrentUserInfo.getInstance(this);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +111,12 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
 
         } else if (id == R.id.drawer_logout) {
 
+            currentUserInfo.clear();
+            mAuth.signOut();
+            FirebaseAuth.getInstance().signOut();
+            finish();
+            goToLoginActivity();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -114,6 +128,11 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
     @Override
     public void onCardClick(int position) {
         Toast.makeText(this, "POSITION " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    public void goToLoginActivity(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
 }
