@@ -30,7 +30,18 @@
     <string name="createList">Crear lista</string>
 
     <string name="inProcess">En proceso.</string>
+    <string name="creatingUser">Creando usuario...</string>
     <string name="CreatingShoppingList">Creando lista de la compra...</string>
+
+    <!-- ERROS REGISTRO -->
     <string name="fieldRequired">Este campo es obligatorio</string>
+    <string name="emailAlreadyRegistered">El email ya está registrado</string>
+    <string name="passwordLengthError">La longitud mínima son 6 caracteres</string>
+    <string name="passwordsIncorrect">Las contraseñas no coinciden</string>
+    <string name="emailIncorrect">Por favor, introduce en email válido</string>
+    <string name="succesfullRegister">El usuario ha sido creado con éxito!</string>
+    <string name="errorRegister">Ups, ha habido un error y el usuario no se ha podido crear</string>
+    <string name="errorUsernameLength">El usuario debe de tener entre 4 y 10 caracteres</string>
+    <string name="errorCreateUser">Error al crear usuario</string>
 
 </resources>
