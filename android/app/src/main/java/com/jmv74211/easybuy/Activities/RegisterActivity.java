@@ -86,9 +86,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void registerUser() {
 
-        this.progress = ProgressDialog.show(this, getResources().getString(R.string.inProcess)
-                , getResources().getString(R.string.creatingUser), true);
-
         final String username = this.username.getText().toString().trim();
         final String email = this.email.getText().toString().trim();
         String password = this.password.getText().toString().trim();
@@ -167,6 +164,10 @@ public class RegisterActivity extends AppCompatActivity {
         if (errorFlag) {
             return;
         }
+
+
+        this.progress = ProgressDialog.show(this, getResources().getString(R.string.inProcess)
+                , getResources().getString(R.string.creatingUser), true);
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(
                 new OnCompleteListener<AuthResult>() {
