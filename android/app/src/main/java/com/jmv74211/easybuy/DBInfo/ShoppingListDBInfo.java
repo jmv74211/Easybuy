@@ -17,7 +17,7 @@ public class ShoppingListDBInfo {
     private final String KEY_DATE= "date";
     private final String KEY_TIME = "time";
     private final String KEY_PARTICIPANTS= "participants";
-    private final String KEY_PRODUCTS = "products";
+    private final String KEY_CART_PRODUCTS = "cartProducts";
     private final String KEY_PRICE = "price";
 
 
@@ -70,8 +70,8 @@ public class ShoppingListDBInfo {
         return KEY_PARTICIPANTS;
     }
 
-    public String getKEY_PRODUCTS() {
-        return KEY_PRODUCTS;
+    public String getKEY_CART_PRODUCTS() {
+        return KEY_CART_PRODUCTS;
     }
 
     public String getKEY_PRICE() {

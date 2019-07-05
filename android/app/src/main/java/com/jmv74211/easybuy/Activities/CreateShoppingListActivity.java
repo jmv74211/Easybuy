@@ -8,9 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -19,8 +17,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.jmv74211.easybuy.DBInfo.ShoppingListDBInfo;
-import com.jmv74211.easybuy.Data.Data;
-import com.jmv74211.easybuy.POJO.ShoppingList;
+import com.jmv74211.easybuy.POJO.CartProduct;
+import com.jmv74211.easybuy.POJO.Product;
 import com.jmv74211.easybuy.R;
 import com.jmv74211.easybuy.Tools.Date;
 
@@ -89,7 +87,13 @@ public class CreateShoppingListActivity extends AppCompatActivity {
         String userCreator = "jmv74211";
         String time = Date.getInstance().getTime();
         float price = 0;
-        ArrayList<String> products = new ArrayList<>();
+        ArrayList<CartProduct> cartProducts = new ArrayList<>();
+
+        Product p1 = new Product(1,"Mermelada",1.05f,"440g",1);
+        Product p2 = new Product(2,"Leche",0.58f,"1L",1);
+
+        cartProducts.add(new CartProduct(p1,5));
+        cartProducts.add(new CartProduct(p2,2));
 
         ArrayList<String> participants = new ArrayList<>(Arrays.asList(userCreator));
 
@@ -127,7 +131,7 @@ public class CreateShoppingListActivity extends AppCompatActivity {
         data.put(shoppingListDBInfo.getKEY_TIME(), time);
         data.put(shoppingListDBInfo.getKEY_PARTICIPANTS(), participants);
         data.put(shoppingListDBInfo.getKEY_PRICE(), price);
-        data.put(shoppingListDBInfo.getKEY_PRODUCTS(), products);
+        data.put(shoppingListDBInfo.getKEY_CART_PRODUCTS(), cartProducts);
 
 
         collectionReference.add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

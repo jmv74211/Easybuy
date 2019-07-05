@@ -1,48 +1,45 @@
 package com.jmv74211.easybuy.Activities;
 
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FieldPath;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.jmv74211.easybuy.Adapters.ProductShoppingListAdapter;
-import com.jmv74211.easybuy.DBInfo.ShoppingListDBInfo;
-import com.jmv74211.easybuy.Data.Data;
+import com.jmv74211.easybuy.DBInfo.ProductDBInfo;
 import com.jmv74211.easybuy.POJO.CartProduct;
-import com.jmv74211.easybuy.POJO.ShoppingList;
+import com.jmv74211.easybuy.POJO.Product;
 import com.jmv74211.easybuy.R;
 
 import java.util.ArrayList;
 
 import javax.annotation.Nullable;
 
-public class ProductShoppingListActivity extends AppCompatActivity implements ProductShoppingListAdapter.OnCardListener {
+public class ProductSearchActivity extends AppCompatActivity implements ProductShoppingListAdapter.OnCardListener {
 
     private Toolbar appbar;
     private FloatingActionButton fab;
     private RecyclerView recyclerView;
-    private TextView cartPriceText;
 
+    private ArrayList<Product> products = new ArrayList<>();
     private ArrayList<CartProduct> cartProducts = new ArrayList<>();
-    private ShoppingList shoppingList;
 
     private ProductShoppingListAdapter adapter;
 
-    private ShoppingListDBInfo shoppingListDBInfo = ShoppingListDBInfo.getInstance();
+    private ProductDBInfo productDBInfo = ProductDBInfo.getInstance();
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference collectionReference = db.collection(shoppingListDBInfo.getCollectionName());
+    private CollectionReference productsCollectionReference = db.collection(productDBInfo.getCollectionName());
 
 
     @Override
@@ -53,7 +50,6 @@ public class ProductShoppingListActivity extends AppCompatActivity implements Pr
         appbar = (Toolbar) findViewById(R.id.app_bar);
         fab = findViewById(R.id.fab);
         recyclerView = findViewById(R.id.recyclerView);
-        cartPriceText = findViewById(R.id.shoppingListNumberPrice);
 
         setSupportActionBar(appbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.productList));
@@ -66,11 +62,6 @@ public class ProductShoppingListActivity extends AppCompatActivity implements Pr
             }
         });
 
-        shoppingList = Data.getShoppingList();
-        cartProducts = shoppingList.getCartProducts();
-
-        cartPriceText.setText(String.valueOf(shoppingList.calculatePrice()) +"€");
-
         recyclerView.setHasFixedSize(true);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -79,7 +70,8 @@ public class ProductShoppingListActivity extends AppCompatActivity implements Pr
 
         recyclerView.setAdapter(adapter);
 
-        collectionReference.whereEqualTo(FieldPath.documentId(),shoppingList.getId()).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        // PRODUCTS
+        productsCollectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
 
@@ -88,9 +80,9 @@ public class ProductShoppingListActivity extends AppCompatActivity implements Pr
                 }
 
                 for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
-                    if (doc.getType() == DocumentChange.Type.MODIFIED) {
-                        ShoppingList sh = doc.getDocument().toObject(ShoppingList.class);
-                        cartProducts = sh.getCartProducts(); // REVISAR ESTA PARTE
+                    if (doc.getType() == DocumentChange.Type.ADDED) {
+                        Product p = doc.getDocument().toObject(Product.class);
+                        products.add(p);
                         adapter.notifyDataSetChanged();
                     }
 
@@ -98,11 +90,15 @@ public class ProductShoppingListActivity extends AppCompatActivity implements Pr
             }
         });
 
+        // CART PRODUCTS
+
+
+
 
     }
 
     @Override
     public void onCardClick(int position) {
-
+        Toast.makeText(this, "POSITION " + position, Toast.LENGTH_SHORT).show();
     }
 }

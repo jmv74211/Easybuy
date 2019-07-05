@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 public class ShoppingList implements Comparable<ShoppingList>, java.io.Serializable {
 
-    private int id;
+    private String id;
     private String name;
     private String creatorUser;
     private String date;
     private String time;
     private ArrayList<String> participants;
-    private ArrayList<Integer> products;
+    private ArrayList<CartProduct> cartProducts;
     private float price;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,37 +25,37 @@ public class ShoppingList implements Comparable<ShoppingList>, java.io.Serializa
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public ShoppingList(int id, String name, String creatorUser, String date, String time, ArrayList<String> participants, ArrayList<Integer> products) {
+    public ShoppingList(String id, String name, String creatorUser, String date, String time, ArrayList<String> participants, ArrayList<CartProduct> cartProducts) {
         this.id = id;
         this.name = name;
         this.creatorUser = creatorUser;
         this.date = date;
         this.time = time;
         this.participants = participants;
-        this.products = products;
+        this.cartProducts = cartProducts;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public ShoppingList(String name, String creatorUser, String date, String time, ArrayList<String> participants, ArrayList<Integer> products) {
+    public ShoppingList(String name, String creatorUser, String date, String time, ArrayList<String> participants, ArrayList<CartProduct> cartProducts) {
         this.name = name;
         this.creatorUser = creatorUser;
         this.date = date;
         this.time = time;
         this.participants = participants;
-        this.products = products;
+        this.cartProducts = cartProducts;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Exclude
-    public int getId() {
+    public String getId() {
         return id;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -127,26 +127,33 @@ public class ShoppingList implements Comparable<ShoppingList>, java.io.Serializa
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public ArrayList<Integer> getProducts() {
-        return products;
+    public ArrayList<CartProduct> getCartProducts() {
+        return cartProducts;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public int getNumProducts() {
-        return products.size();
+
+        int count = 0;
+
+        for(CartProduct cp: cartProducts){
+            count += cp.getQuantity();
+        }
+
+        return count;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void addProduct(int productId) {
-        this.products.add(productId);
+    public void addCartProduct(CartProduct cartProduct) {
+        this.cartProducts.add(cartProduct);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void setProducts(ArrayList<Integer> products) {
-        this.products = products;
+    public void setCartProducts(ArrayList<CartProduct> cartProductProducts) {
+        this.cartProducts = cartProductProducts;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -157,8 +164,15 @@ public class ShoppingList implements Comparable<ShoppingList>, java.io.Serializa
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private void calculatePrice(){
-        // Implement this method later
+    public float calculatePrice(){
+
+        float cost = 0f;
+
+        for(CartProduct c: cartProducts){
+            cost += c.getProduct().getPrice() * c.getQuantity();
+        }
+
+        return cost;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -166,6 +180,8 @@ public class ShoppingList implements Comparable<ShoppingList>, java.io.Serializa
     public void setPrice(float price) {
         this.price = price;
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public String toString() {
@@ -176,7 +192,7 @@ public class ShoppingList implements Comparable<ShoppingList>, java.io.Serializa
                 ", date='" + date + '\'' +
                 ", time='" + time + '\'' +
                 ", participants=" + participants +
-                ", products=" + products +
+                ", cartProducts=" + cartProducts +
                 ", price=" + price +
                 '}';
     }

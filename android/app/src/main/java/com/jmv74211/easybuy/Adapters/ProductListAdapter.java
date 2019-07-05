@@ -9,24 +9,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jmv74211.easybuy.POJO.CartProduct;
 import com.jmv74211.easybuy.POJO.Product;
 import com.jmv74211.easybuy.R;
 
 import java.util.ArrayList;
 
 
-public class ProductShoppingListAdapter extends RecyclerView.Adapter<ProductShoppingListAdapter.ShoppingListProductViewHolder> {
+public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ShoppingListProductViewHolder> {
 
     private Context context;
-    private ArrayList<CartProduct> cartProducts;
+    private ArrayList<Product> products;
     private OnCardListener onCardListener;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public ProductShoppingListAdapter(Context context, ArrayList<CartProduct> shoppingListCartProducts, OnCardListener onCardListener) {
+    public ProductListAdapter(Context context, ArrayList<Product> shoppingListProducts, OnCardListener onCardListener) {
         this.context = context;
-        this.cartProducts = shoppingListCartProducts;
+        this.products = shoppingListProducts;
         this.onCardListener = onCardListener;
     }
 
@@ -47,13 +46,12 @@ public class ProductShoppingListAdapter extends RecyclerView.Adapter<ProductShop
     @Override
     public void onBindViewHolder(@NonNull ShoppingListProductViewHolder holder, int position) {
 
-        CartProduct cp = cartProducts.get(position);
-        Product p = cartProducts.get(position).getProduct();
+        Product p = products.get(position);
 
         holder.textProductName.setText(p.getName());
-        holder.textQuantity.setText("X" + cp.getQuantity());
+        holder.textQuantity.setText(p.getQuantity());
         holder.imageView.setImageResource(context.getResources().getIdentifier("product_" + String.valueOf(p.getId()), "drawable", context.getPackageName()));
-        holder.textPrice.setText(p.getPrice() * cp.getQuantity() + "€");
+        holder.textPrice.setText(p.getPrice() + "€");
 
 
     }
@@ -62,7 +60,7 @@ public class ProductShoppingListAdapter extends RecyclerView.Adapter<ProductShop
 
     @Override
     public int getItemCount() {
-        return this.cartProducts.size();
+        return this.products.size();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,7 +68,7 @@ public class ProductShoppingListAdapter extends RecyclerView.Adapter<ProductShop
     class ShoppingListProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView imageView;
-        TextView textProductName, textQuantity, textPrice, cartPrice;
+        TextView textProductName, textQuantity, textPrice;
         OnCardListener onCardListener;
 
         public ShoppingListProductViewHolder(@NonNull final View itemView, OnCardListener onCardListener) {
@@ -80,7 +78,6 @@ public class ProductShoppingListAdapter extends RecyclerView.Adapter<ProductShop
             textProductName = itemView.findViewById(R.id.textProductName);
             textQuantity = itemView.findViewById(R.id.textNumberQuantity);
             textPrice = itemView.findViewById(R.id.textViewPrice);
-            cartPrice = itemView.findViewById(R.id.shoppingListNumberPrice);
 
             this.onCardListener = onCardListener;
 
@@ -93,8 +90,8 @@ public class ProductShoppingListAdapter extends RecyclerView.Adapter<ProductShop
         }
     }
 
-
     ////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     // Recyclerview click interface
     public interface OnCardListener {

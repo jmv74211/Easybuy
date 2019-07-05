@@ -12,10 +12,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -111,6 +109,7 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
                 for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
                     if (doc.getType() == DocumentChange.Type.ADDED) {
                         ShoppingList sh = doc.getDocument().toObject(ShoppingList.class);
+                        sh.setId(doc.getDocument().getId());
                         shoppingList.add(sh);
                         Collections.sort(shoppingList, Collections.reverseOrder());
                         adapter.notifyDataSetChanged();
@@ -156,8 +155,8 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
     // Recyclerview click
     @Override
     public void onCardClick(int position) {
-        //Toast.makeText(this, "POSITION " + position, Toast.LENGTH_SHORT).show();
-        goToLoginProductShoppingListActivity();
+        String shoppingCartId = shoppingList.get(position).getId();
+        goToProductShoppingListActivity(shoppingCartId);
     }
 
     public void goToLoginActivity(){
@@ -165,8 +164,15 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
         startActivity(intent);
     }
 
-    public void goToLoginProductShoppingListActivity(){
+    public void goToProductShoppingListActivity(String shoppingCartId){
         Intent intent = new Intent(this, ProductShoppingListActivity.class);
+
+        // Global var to share with other activities
+        for(ShoppingList s: shoppingList){
+            if(s.getId() == shoppingCartId)
+                Data.setShoppingList(s);
+        }
+
         startActivity(intent);
     }
 
