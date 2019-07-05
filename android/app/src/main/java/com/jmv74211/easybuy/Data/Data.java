@@ -11,7 +11,7 @@ public class Data {
     private static Data instance;
 
     private ArrayList<User> users;
-    private ArrayList<String> products;
+    private ArrayList<Integer> products;
     private ArrayList<ShoppingList> shoppingList;
 
     private Data(){
@@ -24,25 +24,15 @@ public class Data {
 
         users = new ArrayList<User>(Arrays.asList (user1,user2,user3,user4,user5));
 
-        String product1 = "Pan";
-        String product2 = "Leche";
-        String product3 = "Huevos";
-        String product4 = "Mantequilla";
-        String product5 = "Carne";
-        String product6 = "Pescado";
-        String product7 = "Agua";
-        String product8 = "Manzana";
-        String product9 = "Pizza";
-        String product10 = "Lechuga";
 
-        products = new ArrayList<String>(Arrays.asList (product1,product2,product3,product4,product5,
-                product6,product7,product8,product9,product10));
+
+        products = new ArrayList<Integer>(Arrays.asList (1,2));
 
         shoppingList = new ArrayList<>();
 
 
         ArrayList<String> u = new ArrayList<>(Arrays.asList("jmv74211","nerea"));
-        ArrayList<String> p = new ArrayList<>(Arrays.asList(product1,product4,product7));
+        ArrayList<Integer> p = new ArrayList<>(Arrays.asList(1,2));
 
 
 
@@ -67,11 +57,11 @@ public class Data {
         this.users = users;
     }
 
-    public ArrayList<String> getProducts() {
+    public ArrayList<Integer> getProducts() {
         return products;
     }
 
-    public void setProducts(ArrayList<String> products) {
+    public void setProducts(ArrayList<Integer> products) {
         this.products = products;
     }
 

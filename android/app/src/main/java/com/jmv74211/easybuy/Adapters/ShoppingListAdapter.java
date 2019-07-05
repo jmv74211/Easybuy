@@ -14,11 +14,6 @@ import com.jmv74211.easybuy.R;
 
 import java.util.ArrayList;
 
-/*
- *  Author: @jmv74211
- *  Date: 06/2019
- *  MpagerAdapter to tutorial activity
- * */
 
 public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapter.ShoppingListViewHolder> {
 

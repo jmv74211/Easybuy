@@ -2,6 +2,7 @@ package com.jmv74211.easybuy.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.jmv74211.easybuy.DBInfo.ShoppingListDBInfo;
 import com.jmv74211.easybuy.Data.Data;
 import com.jmv74211.easybuy.POJO.ShoppingList;
 import com.jmv74211.easybuy.R;
@@ -19,6 +26,8 @@ import com.jmv74211.easybuy.Tools.Date;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateShoppingListActivity extends AppCompatActivity {
 
@@ -30,6 +39,12 @@ public class CreateShoppingListActivity extends AppCompatActivity {
     private EditText[] participantsEditText;
     private FloatingActionButton fab;
     private ProgressDialog progress;
+
+    ShoppingListDBInfo shoppingListDBInfo = ShoppingListDBInfo.getInstance();
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference collectionReference = db.collection(shoppingListDBInfo.getCollectionName());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +88,7 @@ public class CreateShoppingListActivity extends AppCompatActivity {
         String date = Date.getInstance().getDate();
         String userCreator = "jmv74211";
         String time = Date.getInstance().getTime();
+        float price = 0;
         ArrayList<String> products = new ArrayList<>();
 
         ArrayList<String> participants = new ArrayList<>(Arrays.asList(userCreator));
@@ -103,19 +119,39 @@ public class CreateShoppingListActivity extends AppCompatActivity {
         this.progress = ProgressDialog.show(this, getResources().getString(R.string.inProcess)
                 , getResources().getString(R.string.CreatingShoppingList), true);
 
-        Data.getInstance().addShoppingList(new ShoppingList(nameList, userCreator, date, time, participants, products));
-        progress.dismiss();
 
-        for(ShoppingList sh : Data.getInstance().getShoppingList()){
-            System.out.println(sh);
-        }
+        Map<String, Object> data = new HashMap<>();
 
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
+        data.put(shoppingListDBInfo.getKEY_NAME(), nameList);
+        data.put(shoppingListDBInfo.getKEY_DATE(), date);
+        data.put(shoppingListDBInfo.getKEY_TIME(), time);
+        data.put(shoppingListDBInfo.getKEY_PARTICIPANTS(), participants);
+        data.put(shoppingListDBInfo.getKEY_PRICE(), price);
+        data.put(shoppingListDBInfo.getKEY_PRODUCTS(), products);
 
-        Toast.makeText(this, "Cesta creada", Toast.LENGTH_SHORT).show();
+
+        collectionReference.add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                progress.dismiss();
+                Toast.makeText(getApplication(), getResources().getText(R.string.successCreateShoppingList), Toast.LENGTH_SHORT).show();
+                goToHomeActivity();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progress.dismiss();
+                Toast.makeText(getApplication(), getResources().getText(R.string.errorCreateShoppingList), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
+    private void goToHomeActivity() {
+        finish();
+        Intent i = new Intent(this, HomeActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
 
 }

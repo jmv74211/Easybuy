@@ -1,51 +1,39 @@
 package com.jmv74211.easybuy.POJO;
 
-public class User implements java.io.Serializable {
+public class Product {
 
-    private String username;
-    private String email;
+    private int id;
     private String name;
-    private String firstName;
-    private String secondName;
+    private float price;
+    private String quantity;
+    private int section;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public User(){
+    public Product(){
 
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public User(String username, String email, String name, String firstName, String secondName) {
-        this.username = username;
-        this.email = email;
+    public Product(int id, String name, float price, String quantity, int section) {
+        this.id = id;
         this.name = name;
-        this.firstName = firstName;
-        this.secondName = secondName;
+        this.price = price;
+        this.quantity = quantity;
+        this.section = section;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public String getUsername() {
-        return username;
+    public int getId() {
+        return id;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public String getEmail() {
-        return email;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setId(int id) {
+        this.id = id;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,41 +50,52 @@ public class User implements java.io.Serializable {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public String getFirstName() {
-        return firstName;
+    public float getPrice() {
+        return price;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public String getSecondName() {
-        return secondName;
+    public String getQuantity() {
+        return quantity;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public int getSection() {
+        return section;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void setSection(int section) {
+        this.section = section;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", email='" + email + '\'' +
+        return "Product{" +
+                "id=" + id +
                 ", name='" + name + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
+                ", price=" + price +
+                ", quantity='" + quantity + '\'' +
+                ", section=" + section +
                 '}';
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-
 }

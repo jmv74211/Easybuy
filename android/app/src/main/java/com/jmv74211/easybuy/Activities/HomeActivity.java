@@ -18,13 +18,23 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.jmv74211.easybuy.Adapters.ShoppingListAdapter;
+import com.jmv74211.easybuy.DBInfo.ShoppingListDBInfo;
 import com.jmv74211.easybuy.Data.CurrentUserInfo;
 import com.jmv74211.easybuy.Data.Data;
 import com.jmv74211.easybuy.POJO.ShoppingList;
 import com.jmv74211.easybuy.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
+import javax.annotation.Nullable;
 
 public class HomeActivity extends AppCompatActivity implements ShoppingListAdapter.OnCardListener {
 
@@ -33,13 +43,16 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
     private FloatingActionButton fab;
     private RecyclerView recyclerView;
 
-    private ArrayList<ShoppingList> shoppingList;
+    private ArrayList<ShoppingList> shoppingList = new ArrayList<>();
 
     private ShoppingListAdapter adapter;
 
     private static CurrentUserInfo currentUserInfo;
+    private static ShoppingListDBInfo shoppingListDBInfo = ShoppingListDBInfo.getInstance();
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference collectionReference = db.collection(shoppingListDBInfo.getCollectionName());
 
 
     @Override
@@ -79,10 +92,6 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
             }
         });
 
-        this.shoppingList = Data.getInstance().getShoppingList();
-
-        System.out.println("SHOPPING LIST = " + this.shoppingList);
-
         recyclerView.setHasFixedSize(true);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -90,6 +99,26 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
         adapter = new ShoppingListAdapter(this, shoppingList, this);
 
         recyclerView.setAdapter(adapter);
+
+        collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+
+                if (e != null) {
+                    return;
+                }
+
+                for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
+                    if (doc.getType() == DocumentChange.Type.ADDED) {
+                        ShoppingList sh = doc.getDocument().toObject(ShoppingList.class);
+                        shoppingList.add(sh);
+                        Collections.sort(shoppingList, Collections.reverseOrder());
+                        adapter.notifyDataSetChanged();
+                    }
+
+                }
+            }
+        });
 
     }
 
@@ -127,11 +156,17 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
     // Recyclerview click
     @Override
     public void onCardClick(int position) {
-        Toast.makeText(this, "POSITION " + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "POSITION " + position, Toast.LENGTH_SHORT).show();
+        goToLoginProductShoppingListActivity();
     }
 
     public void goToLoginActivity(){
         Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToLoginProductShoppingListActivity(){
+        Intent intent = new Intent(this, ProductShoppingListActivity.class);
         startActivity(intent);
     }
 

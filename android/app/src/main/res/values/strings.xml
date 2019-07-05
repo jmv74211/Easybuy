@@ -48,4 +48,27 @@
     <string name="conecting">Conectando...</string>
     <string name="loginError">Error, credenciales incorrectas</string>
 
+
+    <string name="successCreateShoppingList">Se ha creado la lista con éxito</string>
+    <string name="errorCreateShoppingList">Error, no se ha podido crear la lista</string>
+
+    <string name="shoppingListCost">El coste de la lista de compra es de </string>
+
+    <!-- SECTIONS -->
+    <string name="dairy">Lácteos</string>
+    <string name="bakery">Panadería</string>
+    <string name="sweetsAndAssortments">Dulces y surtidos</string>
+    <string name="dressingsAndSauces">Aliños y salsas</string>
+    <string name="pulsesAndPasta">Legumbres y pasta</string>
+    <string name="meats">Carnes</string>
+    <string name="sausages">Embutidos</string>
+    <string name="fruitAndVegetables">Frutas y verduras</string>
+    <string name="frozen">Congelados</string>
+    <string name="fishes">Pescados</string>
+    <string name="drinks">Bebidas</string>
+    <string name="cleanlinessAndHygiene">Limpieza e higiene</string>
+    <string name="drugstore">Droguería</string>
+
+    <string name="productList">Lista de productos</string>
+
 </resources>
