@@ -1,5 +1,6 @@
 package com.jmv74211.easybuy.Activities;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,7 +63,7 @@ public class ProductShoppingListActivity extends AppCompatActivity implements Pr
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                goToSectionListActivity();
             }
         });
 
@@ -100,6 +101,13 @@ public class ProductShoppingListActivity extends AppCompatActivity implements Pr
 
 
     }
+
+    public void goToSectionListActivity(){
+
+        Intent intent = new Intent(getApplication(),SectionListActivity.class);
+        startActivity(intent);
+    }
+
 
     @Override
     public void onCardClick(int position) {

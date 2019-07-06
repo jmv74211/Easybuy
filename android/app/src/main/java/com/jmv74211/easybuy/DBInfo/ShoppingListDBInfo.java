@@ -12,7 +12,7 @@ public class ShoppingListDBInfo {
 
     private final String COLLECTION_NAME="shoppingList";
     private final String KEY_ID = "id";
-    private final String KEY_NAME = "listName";
+    private final String KEY_NAME = "name";
     private final String KEY_USER_CREATOR = "userCreator";
     private final String KEY_DATE= "date";
     private final String KEY_TIME = "time";

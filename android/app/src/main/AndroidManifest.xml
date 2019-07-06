@@ -9,7 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Activities.ProductShoppingListActivity"
+
+        <activity android:name=".Activities.ProductSearchActivity"
+            android:parentActivityName=".Activities.SectionListActivity"/>
+
+        <activity android:name=".Activities.SectionListActivity"
+            android:parentActivityName=".Activities.HomeActivity"
+            />
+        <activity
+            android:name=".Activities.ProductShoppingListActivity"
             android:parentActivityName=".Activities.HomeActivity" />
         <activity
             android:name=".Activities.CreateShoppingListActivity"

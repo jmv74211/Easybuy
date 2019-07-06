@@ -71,4 +71,8 @@
 
     <string name="productList">Lista de productos</string>
 
+    <string name="sections">Secciones</string>
+
+    <string name="allProducts">Todos los productos</string>
+
 </resources>

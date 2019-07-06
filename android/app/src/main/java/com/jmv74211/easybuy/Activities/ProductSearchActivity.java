@@ -1,5 +1,6 @@
 package com.jmv74211.easybuy.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -15,26 +16,27 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.jmv74211.easybuy.Adapters.ProductShoppingListAdapter;
+import com.jmv74211.easybuy.Adapters.ProductListAdapter;
 import com.jmv74211.easybuy.DBInfo.ProductDBInfo;
-import com.jmv74211.easybuy.POJO.CartProduct;
+import com.jmv74211.easybuy.Data.SectionData;
 import com.jmv74211.easybuy.POJO.Product;
 import com.jmv74211.easybuy.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.annotation.Nullable;
 
-public class ProductSearchActivity extends AppCompatActivity implements ProductShoppingListAdapter.OnCardListener {
+public class ProductSearchActivity extends AppCompatActivity implements ProductListAdapter.OnCardListener {
 
     private Toolbar appbar;
     private FloatingActionButton fab;
     private RecyclerView recyclerView;
 
     private ArrayList<Product> products = new ArrayList<>();
-    private ArrayList<CartProduct> cartProducts = new ArrayList<>();
+    private int sectionId;
 
-    private ProductShoppingListAdapter adapter;
+    private ProductListAdapter adapter;
 
     private ProductDBInfo productDBInfo = ProductDBInfo.getInstance();
 
@@ -45,20 +47,30 @@ public class ProductSearchActivity extends AppCompatActivity implements ProductS
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_shopping_list);
+        setContentView(R.layout.activity_product_search_list);
 
         appbar = (Toolbar) findViewById(R.id.app_bar);
         fab = findViewById(R.id.fab);
         recyclerView = findViewById(R.id.recyclerView);
 
+        Intent intent = getIntent();
+        HashMap<String, Object> data = (HashMap<String, Object>) intent.getSerializableExtra("hashMap");
+
+        sectionId = (int) data.get("sectionId");
+        SectionData sectionData = SectionData.getInstance(this);
+        String sectionName = sectionData.getSection(sectionId).trim();
+
         setSupportActionBar(appbar);
-        getSupportActionBar().setTitle(getResources().getString(R.string.productList));
+
+        getSupportActionBar().setTitle(sectionName);
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getApplication(), "ID = " + sectionId, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -66,35 +78,54 @@ public class ProductSearchActivity extends AppCompatActivity implements ProductS
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new ProductShoppingListAdapter(this, cartProducts, this);
+        adapter = new ProductListAdapter(this, products, this);
 
         recyclerView.setAdapter(adapter);
 
-        // PRODUCTS
-        productsCollectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
 
-                if (e != null) {
-                    return;
-                }
+        if (sectionId == 0) { // ALL PRODUCTS
 
-                for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
-                    if (doc.getType() == DocumentChange.Type.ADDED) {
-                        Product p = doc.getDocument().toObject(Product.class);
-                        products.add(p);
-                        adapter.notifyDataSetChanged();
+            productsCollectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+
+                    if (e != null) {
+                        return;
                     }
 
+                    for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
+                        if (doc.getType() == DocumentChange.Type.ADDED) {
+                            Product p = doc.getDocument().toObject(Product.class);
+                            products.add(p);
+                            adapter.notifyDataSetChanged();
+                        }
+
+                    }
                 }
-            }
-        });
-
-        // CART PRODUCTS
+            });
 
 
+        } else { // SECTION PRODUCTS
 
+            productsCollectionReference.whereEqualTo("section", sectionId).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
 
+                    if (e != null) {
+                        return;
+                    }
+
+                    for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
+                        if (doc.getType() == DocumentChange.Type.ADDED) {
+                            Product p = doc.getDocument().toObject(Product.class);
+                            products.add(p);
+                            adapter.notifyDataSetChanged();
+                        }
+
+                    }
+                }
+            });
+        }
     }
 
     @Override
