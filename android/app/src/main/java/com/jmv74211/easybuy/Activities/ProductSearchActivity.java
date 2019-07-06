@@ -6,7 +6,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -97,10 +101,12 @@ public class ProductSearchActivity extends AppCompatActivity implements ProductL
                         if (doc.getType() == DocumentChange.Type.ADDED) {
                             Product p = doc.getDocument().toObject(Product.class);
                             products.add(p);
-                            adapter.notifyDataSetChanged();
                         }
 
                     }
+                    adapter.notifyDataSetChanged();
+                    adapter.updateFullList(new ArrayList<Product>(products));
+
                 }
             });
 
@@ -119,10 +125,13 @@ public class ProductSearchActivity extends AppCompatActivity implements ProductL
                         if (doc.getType() == DocumentChange.Type.ADDED) {
                             Product p = doc.getDocument().toObject(Product.class);
                             products.add(p);
-                            adapter.notifyDataSetChanged();
                         }
 
                     }
+
+                    adapter.notifyDataSetChanged();
+                    // Set full
+                    adapter.updateFullList(new ArrayList<Product>(products));
                 }
             });
         }
@@ -131,5 +140,30 @@ public class ProductSearchActivity extends AppCompatActivity implements ProductL
     @Override
     public void onCardClick(int position) {
         Toast.makeText(this, "POSITION " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_appbar, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+
+                adapter.getFilter().filter(s);
+                return false;
+            }
+        });
+
+        return true;
     }
 }

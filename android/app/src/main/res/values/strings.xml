@@ -74,5 +74,6 @@
     <string name="sections">Secciones</string>
 
     <string name="allProducts">Todos los productos</string>
+    <string name="search">Buscar</string>
 
 </resources>
