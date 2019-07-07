@@ -51,7 +51,6 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<ShoppingListAdapte
         holder.textViewTime.setText(sl1.getTime());
         holder.imageView.setImageResource(context.getResources().getIdentifier("mercadona_logo", "drawable", context.getPackageName()));
         holder.TextViewNameList.setText(sl1.getName());
-        System.out.println("NOMBRE == " + sl1.getName());
         holder.textViewParticipants.setText(sl1.getNumParticipants()+"/10");
         holder.textViewProducts.setText( String.valueOf(sl1.getNumProducts()) + " productos");
         holder.textViewPrice.setText(sl1.calculatePrice()+" €");

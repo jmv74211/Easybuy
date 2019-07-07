@@ -51,11 +51,9 @@ public class SectionListAdapter extends RecyclerView.Adapter<SectionListAdapter.
 
         holder.sectionNameText.setText(section.getName());
         holder.relativeLayout.setBackgroundColor(Color.parseColor(section.getColor()));
+        String photoName = "section_" + position;
 
-        if(section.getId() != 0)
-            holder.imageView.setImageResource(context.getResources().getIdentifier("mercadona_logo", "drawable", context.getPackageName()));
-        else
-            holder.imageView.setImageResource(context.getResources().getIdentifier("section0", "drawable", context.getPackageName()));
+            holder.imageView.setImageResource(context.getResources().getIdentifier(photoName, "drawable", context.getPackageName()));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

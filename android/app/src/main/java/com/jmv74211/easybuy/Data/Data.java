@@ -1,6 +1,7 @@
 package com.jmv74211.easybuy.Data;
 
 
+import com.jmv74211.easybuy.POJO.CartProduct;
 import com.jmv74211.easybuy.POJO.ShoppingList;
 
 public class Data {
@@ -36,6 +37,20 @@ public class Data {
 
     public static void setShoppingList(ShoppingList sh) {
         Data.shoppingList = sh;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public static boolean checkIfCartContainsProduct(int productId) {
+        boolean exist = false;
+
+        for(CartProduct item: shoppingList.getCartProducts()){
+            if(productId == item.getProduct().getId()){
+                exist = true;
+            }
+        }
+
+        return exist;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

@@ -18,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.jmv74211.easybuy.Adapters.ProductShoppingListAdapter;
+import com.jmv74211.easybuy.Adapters.ShoppingListAdapter;
 import com.jmv74211.easybuy.DBInfo.ShoppingListDBInfo;
 import com.jmv74211.easybuy.Data.Data;
 import com.jmv74211.easybuy.POJO.CartProduct;
@@ -96,6 +97,9 @@ public class ProductShoppingListActivity extends AppCompatActivity implements Pr
                     }
 
                 }
+
+                cartPriceText.setText(String.valueOf(shoppingList.calculatePrice()) +"€");
+
             }
         });
 
@@ -112,5 +116,12 @@ public class ProductShoppingListActivity extends AppCompatActivity implements Pr
     @Override
     public void onCardClick(int position) {
 
+    }
+
+    // When the user go back, it is forced to create homeActivity to update shoppingListData
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,HomeActivity.class);
+        startActivity(intent);
     }
 }

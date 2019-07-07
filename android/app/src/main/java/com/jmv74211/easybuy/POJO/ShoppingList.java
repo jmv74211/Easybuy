@@ -1,10 +1,12 @@
 package com.jmv74211.easybuy.POJO;
 
 import com.google.firebase.firestore.Exclude;
+import com.jmv74211.easybuy.DBInfo.ShoppingListDBInfo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ShoppingList implements Comparable<ShoppingList>, java.io.Serializable {
 
@@ -16,6 +18,8 @@ public class ShoppingList implements Comparable<ShoppingList>, java.io.Serializa
     private ArrayList<String> participants;
     private ArrayList<CartProduct> cartProducts;
     private float price;
+
+    private ShoppingListDBInfo shoppingListDBInfo = ShoppingListDBInfo.getInstance();
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -166,13 +170,16 @@ public class ShoppingList implements Comparable<ShoppingList>, java.io.Serializa
 
     public float calculatePrice(){
 
+        System.out.println("ENTRO EN CALCULAR");
         float cost = 0f;
 
         for(CartProduct c: cartProducts){
             cost += c.getProduct().getPrice() * c.getQuantity();
         }
 
-        return cost;
+        float roundedCost =  Math.round(cost * 100.0f) / 100.0f;
+
+        return roundedCost;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -196,6 +203,24 @@ public class ShoppingList implements Comparable<ShoppingList>, java.io.Serializa
                 ", price=" + price +
                 '}';
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+   public HashMap<String,Object> toMap(){
+
+        HashMap<String,Object> data = new HashMap<String,Object>();
+
+        data.put(shoppingListDBInfo.getKEY_NAME(),getName());
+        data.put(shoppingListDBInfo.getKEY_USER_CREATOR(),getCreatorUser());
+        data.put(shoppingListDBInfo.getKEY_DATE(),getDate());
+        data.put(shoppingListDBInfo.getKEY_TIME(),getTime());
+        data.put(shoppingListDBInfo.getKEY_PARTICIPANTS(),getParticipants());
+        data.put(shoppingListDBInfo.getKEY_CART_PRODUCTS(),getCartProducts());
+        data.put(shoppingListDBInfo.getKEY_PRICE(),getPrice());
+
+        return data;
+   }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 

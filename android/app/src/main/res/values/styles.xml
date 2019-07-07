@@ -13,4 +13,23 @@
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
     </style>
 
+
+    <style name="toastSuccessAddProduct">
+        <item name="colorBackground">@color/cGreen</item>
+        <item name="textColor">#fff</item>
+        <item name="iconLeft">@drawable/ic_check_white</item>
+        <item name="strokeColor">#fff</item>
+        <item name="strokeWidth">3dp</item>
+
+    </style>
+
+    <style name="toastErrorAddProduct">
+        <item name="colorBackground">@color/cred</item>
+        <item name="textColor">#fff</item>
+        <item name="iconLeft">@drawable/ic_close</item>
+        <item name="strokeColor">#fff</item>
+        <item name="strokeWidth">3dp</item>
+    </style>
+
+
 </resources>

@@ -76,4 +76,12 @@
     <string name="allProducts">Todos los productos</string>
     <string name="search">Buscar</string>
 
+    <string name="addProducts">Añadir productos</string>
+    <string name="chooseQuantity">Seleccione la cantidad :</string>
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+
+    <string name="productAddedSuccess">Producto añadido!</string>
+    <string name="productAdddedError">Error, producto NO añadido, vuelve a intentarlo</string>
+
 </resources>
