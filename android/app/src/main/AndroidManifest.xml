@@ -10,23 +10,38 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <activity android:name=".Activities.ProductSearchActivity"
-            android:parentActivityName=".Activities.SectionListActivity"/>
+        <activity
+            android:name=".Activities.ProductSearchActivity"
+            android:parentActivityName=".Activities.SectionListActivity"
+            android:theme="@style/AppThemeTransparent" />
 
-        <activity android:name=".Activities.SectionListActivity"
+        <activity
+            android:name=".Activities.SectionListActivity"
             android:parentActivityName=".Activities.HomeActivity"
-            />
+            android:theme="@style/AppThemeTransparent" />
+
         <activity
             android:name=".Activities.CartListActivity"
-            android:parentActivityName=".Activities.HomeActivity" />
+            android:parentActivityName=".Activities.HomeActivity"
+            android:theme="@style/AppThemeTransparent" />
+
         <activity
             android:name=".Activities.CreateShoppingListActivity"
-            android:parentActivityName=".Activities.HomeActivity" />
-        <activity android:name=".Activities.HomeActivity" />
+            android:parentActivityName=".Activities.HomeActivity"
+            android:theme="@style/AppThemeTransparent" />
+
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:theme="@style/AppThemeTransparent" />
+
         <activity
             android:name=".Activities.RegisterActivity"
-            android:parentActivityName=".Activities.LoginActivity" />
-        <activity android:name=".Activities.LoginActivity">
+            android:parentActivityName=".Activities.LoginActivity"
+            android:theme="@style/AppThemeTransparent" />
+
+        <activity
+            android:name=".Activities.HomeActivity"
+            android:theme="@style/AppThemeTransparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

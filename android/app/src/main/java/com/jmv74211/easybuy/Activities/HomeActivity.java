@@ -1,6 +1,7 @@
 package com.jmv74211.easybuy.Activities;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -12,8 +13,12 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,7 +32,9 @@ import com.jmv74211.easybuy.Adapters.ShoppingListAdapter;
 import com.jmv74211.easybuy.DBInfo.ShoppingListDBInfo;
 import com.jmv74211.easybuy.Data.CurrentUserInfo;
 import com.jmv74211.easybuy.Data.Data;
+import com.jmv74211.easybuy.Dialogs.DialogDeleteShoppingList;
 import com.jmv74211.easybuy.POJO.ShoppingList;
+import com.jmv74211.easybuy.POJO.User;
 import com.jmv74211.easybuy.R;
 
 import java.util.ArrayList;
@@ -35,7 +42,7 @@ import java.util.Collections;
 
 import javax.annotation.Nullable;
 
-public class HomeActivity extends AppCompatActivity implements ShoppingListAdapter.OnCardListener {
+public class HomeActivity extends AppCompatActivity implements ShoppingListAdapter.OnCardListener, DialogDeleteShoppingList.DialogDeleteShoppingListListener {
 
     private DrawerLayout drawer;
     private Toolbar appbar;
@@ -53,6 +60,22 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collectionReference = db.collection(shoppingListDBInfo.getCollectionName());
 
+    @Override
+    // UPDATE DATA IN RECYCLERVIEW
+    protected void onStart() {
+
+        if (!userIsLogged()) {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+
+        if(adapter != null){
+            adapter.notifyDataSetChanged();
+        }
+
+
+        super.onStart();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +86,11 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
         appbar = (Toolbar) findViewById(R.id.app_bar);
         fab = findViewById(R.id.fab);
         recyclerView = findViewById(R.id.recyclerView);
+
+        /*if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        }*/
 
         setSupportActionBar(appbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.myList));
@@ -99,7 +127,11 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
 
         recyclerView.setAdapter(adapter);
 
-        collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+        // SWIPE MOVE TO DELETE A PRODUCT CART
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
+
+        collectionReference.whereArrayContains(shoppingListDBInfo.getKEY_PARTICIPANTS(),currentUserInfo.getCurrentUserInfo().getUsername())
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
 
@@ -120,6 +152,7 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
             }
         });
 
+        loadUserInformation();
     }
 
     @Override
@@ -175,6 +208,80 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
         }
 
         startActivity(intent);
+    }
+
+    private boolean userIsLogged() {
+        if (this.mAuth.getCurrentUser() != null)
+            return true;
+        else
+            return false;
+    }
+
+    private void loadUserInformation() {
+
+        if (userIsLogged()) {
+
+            final User user = currentUserInfo.getCurrentUserInfo();
+
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            View headerView = navigationView.getHeaderView(0);
+            TextView navFullName = (TextView) headerView.findViewById(R.id.userFullNameDrawer);
+            TextView navUsername = (TextView) headerView.findViewById(R.id.usernameDrawer);
+
+            String name = user.getName() + " " + user.getFirstName() + " " + user.getSecondName();
+            navFullName.setText(name);
+            navUsername.setText("@" + user.getUsername());
+
+
+        }
+    }
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // DIALOG FRAGMENT TO CONFIRM DELETE SHOPPING LIST
+    @Override
+    public void onClickYes(int position) {
+        adapter.deleteItem(position);
+        //Toast.makeText(this, "ELIMINO POSICIÓN " + position,Toast.LENGTH_LONG).show();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @Override
+    public void onClickNo() {
+        Intent intent = new Intent (this, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // SWIPE CALLBACK
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,
+            ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+            int position = viewHolder.getAdapterPosition();
+            openDialogQuestion(position);
+        }
+
+    };
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void openDialogQuestion(int position) {
+
+        DialogDeleteShoppingList dialog = new DialogDeleteShoppingList(position);
+        dialog.show(getSupportFragmentManager(), "dialogDeleteShoppingList");
     }
 
 }

@@ -87,4 +87,12 @@
     <string name="productDeletedSuccess">Producto eliminado!</string>
     <string name="productDeletedError">Error, el producto NO se ha eliminado, vuelve a intentarlo</string>
 
+    <string name="confirmDeleteShoppingList">¿Seguro que quieres eliminar la lista?</string>
+    <string name="deleteShoppingList">Eliminar lista de compra</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+
+    <string name="shoppingListDeletedSuccess">Lista eliminada correctamente!</string>
+    <string name="shoppingListDeletedError">Error, la lista NO se ha eliminado, vuelve a intentarlo</string>
+
 </resources>

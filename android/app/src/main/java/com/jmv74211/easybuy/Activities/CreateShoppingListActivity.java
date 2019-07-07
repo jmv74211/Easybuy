@@ -17,6 +17,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.jmv74211.easybuy.DBInfo.ShoppingListDBInfo;
+import com.jmv74211.easybuy.Data.CurrentUserInfo;
 import com.jmv74211.easybuy.POJO.CartProduct;
 import com.jmv74211.easybuy.POJO.Product;
 import com.jmv74211.easybuy.R;
@@ -84,16 +85,10 @@ public class CreateShoppingListActivity extends AppCompatActivity {
 
         String nameList = this.nameList.getText().toString().trim();
         String date = Date.getInstance().getDate();
-        String userCreator = "jmv74211";
+        String userCreator = CurrentUserInfo.getInstance(this).getCurrentUserInfo().getUsername();
         String time = Date.getInstance().getTime();
         float price = 0;
         ArrayList<CartProduct> cartProducts = new ArrayList<>();
-
-        Product p1 = new Product(1,"Mermelada",1.05f,"440g",1);
-        Product p2 = new Product(2,"Leche",0.58f,"1L",1);
-
-        cartProducts.add(new CartProduct(p1,5));
-        cartProducts.add(new CartProduct(p2,2));
 
         ArrayList<String> participants = new ArrayList<>(Arrays.asList(userCreator));
 
@@ -131,6 +126,7 @@ public class CreateShoppingListActivity extends AppCompatActivity {
         data.put(shoppingListDBInfo.getKEY_TIME(), time);
         data.put(shoppingListDBInfo.getKEY_PARTICIPANTS(), participants);
         data.put(shoppingListDBInfo.getKEY_PRICE(), price);
+        data.put(shoppingListDBInfo.getKEY_USER_CREATOR(), userCreator);
         data.put(shoppingListDBInfo.getKEY_CART_PRODUCTS(), cartProducts);
 
 

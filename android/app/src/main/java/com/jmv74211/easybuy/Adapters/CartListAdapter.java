@@ -80,19 +80,11 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.CartLi
         return this.cartProducts.size();
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void deleteItem(int position) {
 
-        //roduct product = cartProducts.get(position).getProduct();
-
-        //System.out.println("EN DELETE PRODUCT VALE = " + product.toString());
-        System.out.println("EN DELETE ANTES = " + cartProducts.toString());
-
-        //cartProducts.remove(product);
-
         cartProducts.remove(position);
-
-        System.out.println("EN DELETE DESPUES = " + cartProducts.toString());
 
         ShoppingList shoppingList = Data.getShoppingList();
         shoppingList.setCartProducts(cartProducts);

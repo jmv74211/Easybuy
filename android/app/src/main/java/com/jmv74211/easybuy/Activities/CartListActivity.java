@@ -129,11 +129,11 @@ public class CartListActivity extends AppCompatActivity implements CartListAdapt
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     // When the user go back, it is forced to create homeActivity to update shoppingListData
-    @Override
+ /*   @Override
     public void onBackPressed() {
         Intent intent = new Intent(this,HomeActivity.class);
         startActivity(intent);
-    }
+    }*/
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -149,10 +149,7 @@ public class CartListActivity extends AppCompatActivity implements CartListAdapt
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
             int position = viewHolder.getAdapterPosition();
-            cartProducts.remove(position);
             adapter.deleteItem(position);
-
-
         }
     };
 
