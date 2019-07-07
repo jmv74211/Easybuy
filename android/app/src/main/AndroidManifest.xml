@@ -17,7 +17,7 @@
             android:parentActivityName=".Activities.HomeActivity"
             />
         <activity
-            android:name=".Activities.ProductShoppingListActivity"
+            android:name=".Activities.CartListActivity"
             android:parentActivityName=".Activities.HomeActivity" />
         <activity
             android:name=".Activities.CreateShoppingListActivity"

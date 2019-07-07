@@ -223,12 +223,6 @@ public class ProductSearchActivity extends AppCompatActivity implements ProductL
 
         mapInformation = Data.getShoppingList().toMap();
 
-        System.out.println("RECIBO CANTIDAD DE " + quantity + " DE PRODUCT ID " + productId);
-
-        System.out.println("INFORMACIÓN VALE = " + Data.getShoppingList().toString());
-
-        System.out.println("VOY A AÑADIR = " + mapInformation.toString());
-
         sucessAddProductToast();
 
         shoppingListCollectionReference.document(Data.getShoppingList().getId()).update(mapInformation).addOnSuccessListener(new OnSuccessListener<Void>() {

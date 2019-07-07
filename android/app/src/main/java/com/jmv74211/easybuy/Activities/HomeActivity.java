@@ -166,7 +166,7 @@ public class HomeActivity extends AppCompatActivity implements ShoppingListAdapt
     }
 
     public void goToProductShoppingListActivity(String shoppingCartId){
-        Intent intent = new Intent(this, ProductShoppingListActivity.class);
+        Intent intent = new Intent(this, CartListActivity.class);
 
         // Global var to share with other activities
         for(ShoppingList s: shoppingList){
