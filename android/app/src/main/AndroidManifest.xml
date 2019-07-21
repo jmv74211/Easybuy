@@ -12,8 +12,7 @@
 
         <activity
             android:name=".Activities.ProductSearchActivity"
-            android:parentActivityName=".Activities.SectionListActivity"
-            android:theme="@style/AppThemeTransparent" />
+            android:parentActivityName=".Activities.SectionListActivity" />
 
         <activity
             android:name=".Activities.SectionListActivity"

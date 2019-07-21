@@ -67,7 +67,14 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.CartLi
 
         holder.textProductName.setText(p.getName());
         holder.textQuantity.setText("X" + cp.getQuantity());
-        holder.imageView.setImageResource(context.getResources().getIdentifier("product_" + String.valueOf(p.getId()), "drawable", context.getPackageName()));
+
+        int resourceId = context.getResources().getIdentifier("product_" + String.valueOf(p.getId()), "drawable", context.getPackageName());
+
+        if(resourceId != 0)
+            holder.imageView.setImageResource(resourceId);
+        else
+            holder.imageView.setImageResource(context.getResources().getIdentifier("product_unavailable", "drawable", context.getPackageName()));
+
         holder.textPrice.setText(p.getPrice() * cp.getQuantity() + "€");
 
 

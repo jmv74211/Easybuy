@@ -170,7 +170,6 @@ public class ShoppingList implements Comparable<ShoppingList>, java.io.Serializa
 
     public float calculatePrice(){
 
-        System.out.println("ENTRO EN CALCULAR");
         float cost = 0f;
 
         for(CartProduct c: cartProducts){

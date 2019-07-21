@@ -27,7 +27,7 @@
         <item name="colorBackground">@color/cGreen</item>
         <item name="textColor">#fff</item>
         <item name="iconLeft">@drawable/ic_check_white</item>
-        <item name="strokeColor">#fff</item>
+        <item name="strokeColor">@color/colorPrimary</item>
         <item name="strokeWidth">3dp</item>
 
     </style>

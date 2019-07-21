@@ -8,18 +8,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.jmv74211.easybuy.DBInfo.ShoppingListDBInfo;
+import com.jmv74211.easybuy.DBInfo.UserDBInfo;
 import com.jmv74211.easybuy.Data.CurrentUserInfo;
 import com.jmv74211.easybuy.POJO.CartProduct;
-import com.jmv74211.easybuy.POJO.Product;
+import com.jmv74211.easybuy.POJO.User;
 import com.jmv74211.easybuy.R;
 import com.jmv74211.easybuy.Tools.Date;
 
@@ -33,6 +38,7 @@ public class CreateShoppingListActivity extends AppCompatActivity {
     private Toolbar appbar;
 
     private final int maxParticipants = 10;
+    ArrayList<String> users;
 
     private EditText nameList;
     private EditText[] participantsEditText;
@@ -40,9 +46,13 @@ public class CreateShoppingListActivity extends AppCompatActivity {
     private ProgressDialog progress;
 
     ShoppingListDBInfo shoppingListDBInfo = ShoppingListDBInfo.getInstance();
+    UserDBInfo userDBInfo = UserDBInfo.getInstance();
+
+    private ArrayAdapter<String> adapter;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collectionReference = db.collection(shoppingListDBInfo.getCollectionName());
+    private CollectionReference userCollectionReference = db.collection(userDBInfo.getCollectionName());
 
 
     @Override
@@ -55,6 +65,8 @@ public class CreateShoppingListActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getResources().getString(R.string.createList));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+
+        users = new ArrayList<>();
 
         fab = findViewById(R.id.fab);
         nameList = (EditText) findViewById(R.id.nameList);
@@ -77,6 +89,37 @@ public class CreateShoppingListActivity extends AppCompatActivity {
                 createShoppingList();
             }
         });
+
+
+        userCollectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
+                    User user = doc.getDocument().toObject(User.class);
+                    users.add(user.getUsername());
+                    adapter.notifyDataSetChanged();
+
+                }
+            }
+        });
+
+        AutoCompleteTextView[] participants = new AutoCompleteTextView[maxParticipants];
+        participants[0] = findViewById(R.id.participant1);
+        participants[1] = findViewById(R.id.participant2);
+        participants[2] = findViewById(R.id.participant3);
+        participants[3] = findViewById(R.id.participant4);
+        participants[4] = findViewById(R.id.participant5);
+        participants[5] = findViewById(R.id.participant6);
+        participants[6] = findViewById(R.id.participant7);
+        participants[7] = findViewById(R.id.participant8);
+        participants[8] = findViewById(R.id.participant9);
+        participants[9] = findViewById(R.id.participant10);
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, users);
+
+        for (int i = 0; i < participants.length; i++) {
+            participants[i].setAdapter(adapter);
+        }
 
     }
 
@@ -110,14 +153,47 @@ public class CreateShoppingListActivity extends AppCompatActivity {
             errorFlag = true;
         }
 
-        if (errorFlag){
-            return;
+        // check if username participants exist
+        int counter = 0;
+        for (String item : participants) {
+
+            boolean exist = false;
+
+            for (String username : users) {
+                if (username == item || username.equals(item)) {
+                    exist = true;
+                }
+            }
+
+            if (!exist) {
+                errorFlag = true;          // counter -1 because the first is the user creator.
+                this.participantsEditText[counter - 1].setError(getResources().getString(R.string.userDoesNotExist));
+                this.participantsEditText[counter - 1].requestFocus();
+            }
+
+            counter++;
+        }
+
+        // check if user is already register in the shoppingList
+        boolean duplicated = false;
+        for (int i = 0; i < participants.size() && !duplicated; i++) {
+            for (int j = i + 1; j < participants.size() && !duplicated; j++) {
+                if (participants.get(i).equals(participants.get(j))) {
+                    this.participantsEditText[j-1].setError(getResources().getString(R.string.errorAddUserToShoppingList));
+                    this.participantsEditText[j-1].requestFocus();
+                    duplicated = true;
+                    errorFlag = true;
+                }
+            }
         }
 
 
+        if (errorFlag) {
+            return;
+        }
+
         this.progress = ProgressDialog.show(this, getResources().getString(R.string.inProcess)
                 , getResources().getString(R.string.CreatingShoppingList), true);
-
 
         Map<String, Object> data = new HashMap<>();
 

@@ -42,8 +42,8 @@
                 android:hint="@string/email"
                 android:inputType="text"
                 android:letterSpacing="0.1"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="@color/colorPrimaryDark"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/cardview_dark_background"
                 android:textSize="16dp"
 
                 />
@@ -75,8 +75,8 @@
                 android:hint="@string/username"
                 android:inputType="text"
                 android:letterSpacing="0.1"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="@color/colorPrimaryDark"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/cardview_dark_background"
                 android:textSize="16dp" />
         </LinearLayout>
 
@@ -106,8 +106,8 @@
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:letterSpacing="0.1"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="@color/colorPrimaryDark"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/cardview_dark_background"
                 android:textSize="16dp" />
         </LinearLayout>
 
@@ -137,8 +137,8 @@
                 android:hint="@string/repatPassword"
                 android:inputType="textPassword"
                 android:letterSpacing="0.1"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="@color/colorPrimaryDark"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/cardview_dark_background"
                 android:textSize="16dp" />
         </LinearLayout>
 
@@ -168,8 +168,8 @@
                 android:background="#00000000"
                 android:hint="@string/name"
                 android:letterSpacing="0.1"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="@color/colorPrimaryDark"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/cardview_dark_background"
                 android:textSize="16dp" />
 
         </LinearLayout>
@@ -200,8 +200,8 @@
                 android:background="#00000000"
                 android:hint="@string/firstName"
                 android:letterSpacing="0.1"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="@color/colorPrimaryDark"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/cardview_dark_background"
                 android:textSize="16dp" />
 
         </LinearLayout>
@@ -231,8 +231,8 @@
                 android:background="#00000000"
                 android:hint="@string/secondName"
                 android:letterSpacing="0.1"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="@color/colorPrimaryDark"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="@color/cardview_dark_background"
                 android:textSize="16dp" />
 
         </LinearLayout>
