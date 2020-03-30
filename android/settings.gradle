@@ -1,1 +1,2 @@
+rootProject.name='Easybuy'
 include ':app'

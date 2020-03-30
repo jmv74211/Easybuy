@@ -22,7 +22,5 @@
     <color name="cBrown"> #a1887f</color>
     <color name="cYellow"> #fff176</color>
 
-
-
-
+    <color name="ic_launcher_background">#FFFFFF</color>
 </resources>

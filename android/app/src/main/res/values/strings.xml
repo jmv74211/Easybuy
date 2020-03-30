@@ -1,102 +1,13 @@
 <resources>
-    <string name="app_name">EasyBuy</string>
-    <string name="user">Usuario</string>
-    <string name="password">Contraseña</string>
-    <string name="logIn">Iniciar sesión</string>
-    <string name="questionRegister">¿Necesitas cuenta?</string>
-    <string name="clickHereToCreate">Regístrate aquí</string>
-
-    <string name="createUserAccount">Registrarse</string>
-    <string name="email">Email</string>
-    <string name="username">Nombre de usuario</string>
-    <string name="repatPassword">Vuelve a escribir la contraseña</string>
-    <string name="name">Nombre</string>
-    <string name="firstName">Primer apellido</string>
-    <string name="secondName">Segundo apellido</string>
-    <string name="signup">Registrarse</string>
-    <string name="createAccount">Crear cuenta</string>
-
-    <string name="usernameDrawer">\@Nombre usuario</string>
-    <string name="navigationDrawerOpen">Abrir drawer</string>
-    <string name="navigationDrawerClose">Cerrar drawer</string>
-    <string name="myProfile">Mi perfil</string>
-    <string name="exit">Salir</string>
-    <string name="logOut">Cerrar sesión</string>
-
-
-    <string name="myList">Mis listas</string>
-
-    <string name="nameList">Nombre de la lista</string>
-    <string name="participantsShoppingList">Participantes de la lista</string>
-    <string name="createList">Crear lista</string>
-
-    <string name="inProcess">En proceso.</string>
-    <string name="creatingUser">Creando usuario...</string>
-    <string name="CreatingShoppingList">Creando lista de la compra...</string>
-
-    <!-- ERRORES REGISTRO -->
-    <string name="fieldRequired">Este campo es obligatorio</string>
-    <string name="emailAlreadyRegistered">El email ya está registrado</string>
-    <string name="passwordLengthError">La longitud mínima son 6 caracteres</string>
-    <string name="passwordsIncorrect">Las contraseñas no coinciden</string>
-    <string name="emailIncorrect">Por favor, introduce en email válido</string>
-    <string name="succesfullRegister">El usuario ha sido creado con éxito!</string>
-    <string name="errorRegister">Ups, ha habido un error y el usuario no se ha podido crear</string>
-    <string name="errorUsernameLength">El usuario debe de tener entre 4 y 10 caracteres</string>
-    <string name="errorCreateUser">Error al crear usuario</string>
-    <string name="userDoesNotExist">Este usuario no existe</string>
-    <string name="errorAddUserToShoppingList">Error, no se puede añadir dos veces al mismo usuario</string>
-
-
-    <string name="errorReadingUserInfo">Error al cargar los datos del usuario</string>
-    <string name="conecting">Conectando...</string>
-    <string name="loginError">Error, credenciales incorrectas</string>
-
-
-    <string name="successCreateShoppingList">Se ha creado la lista con éxito</string>
-    <string name="errorCreateShoppingList">Error, no se ha podido crear la lista</string>
-
-    <string name="shoppingListCost">El coste de la lista de compra es de </string>
-
-    <!-- SECTIONS -->
-    <string name="dairy">Lácteos</string>
-    <string name="bakery">Panadería</string>
-    <string name="sweetsAndAssortments">Dulces y surtidos</string>
-    <string name="dressingsAndSauces">Aliños y salsas</string>
-    <string name="pulsesAndPasta">Legumbres y pasta</string>
-    <string name="meats">Carnes</string>
-    <string name="sausages">Embutidos</string>
-    <string name="fruitAndVegetables">Frutas y verduras</string>
-    <string name="frozen">Congelados</string>
-    <string name="fishes">Pescados</string>
-    <string name="drinks">Bebidas</string>
-    <string name="cleanlinessAndHygiene">Limpieza e higiene</string>
-    <string name="drugstore">Droguería</string>
+    <string name="app_name">Easybuy</string>
 
     <string name="productList">Lista de productos</string>
-
-    <string name="sections">Secciones</string>
-
-    <string name="allProducts">Todos los productos</string>
+    <string name="shoppingListCost">El coste de la lista de compra es de </string>
     <string name="search">Buscar</string>
-
-    <string name="addProducts">Añadir productos</string>
-    <string name="chooseQuantity">Seleccione la cantidad :</string>
-    <string name="accept">Aceptar</string>
-    <string name="cancel">Cancelar</string>
-
-    <string name="productAddedSuccess">Producto añadido!</string>
-    <string name="productAdddedError">Error, producto NO añadido, vuelve a intentarlo</string>
-
+    <string name="productName">Nombre del producto</string>
+    <string name="quantity">Cantidad</string>
     <string name="productDeletedSuccess">Producto eliminado!</string>
     <string name="productDeletedError">Error, el producto NO se ha eliminado, vuelve a intentarlo</string>
 
-    <string name="confirmDeleteShoppingList">¿Seguro que quieres eliminar la lista?</string>
-    <string name="deleteShoppingList">Eliminar lista de compra</string>
-    <string name="yes">Si</string>
-    <string name="no">No</string>
-
-    <string name="shoppingListDeletedSuccess">Lista eliminada correctamente!</string>
-    <string name="shoppingListDeletedError">Error, la lista NO se ha eliminado, vuelve a intentarlo</string>
 
 </resources>

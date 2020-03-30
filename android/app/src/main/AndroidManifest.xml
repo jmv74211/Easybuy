@@ -9,41 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
         <activity
-            android:name=".Activities.ProductSearchActivity"
-            android:parentActivityName=".Activities.SectionListActivity" />
-
-        <activity
-            android:name=".Activities.SectionListActivity"
-            android:parentActivityName=".Activities.HomeActivity"
-            android:theme="@style/AppThemeTransparent" />
-
-        <activity
-            android:name=".Activities.CartListActivity"
-            android:parentActivityName=".Activities.HomeActivity"
-            android:theme="@style/AppThemeTransparent" />
-
-        <activity
-            android:name=".Activities.CreateShoppingListActivity"
-            android:parentActivityName=".Activities.HomeActivity"
-            android:theme="@style/AppThemeTransparent" />
-
-        <activity
-            android:name=".Activities.LoginActivity"
-            android:theme="@style/AppThemeTransparent" />
-
-        <activity
-            android:name=".Activities.RegisterActivity"
-            android:parentActivityName=".Activities.LoginActivity"
-            android:theme="@style/AppThemeTransparent" />
-
-        <activity
-            android:name=".Activities.HomeActivity"
-            android:theme="@style/AppThemeTransparent">
+            android:name=".activities.CartActivity">
+            <!--android:theme="@style/AppThemeTransparent">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
