@@ -1,77 +1,80 @@
 package com.jmv74211.easybuy.models;
 
-public class Section {
+import java.io.Serializable;
 
-    private int id;
-    private String name;
-    private String color;
+public class Section implements Serializable {
 
-    // ---------------------------------------------------------------------------------------------
+  private int id;
+  private String name;
+  private String color;
 
-    public Section(){
+  // ---------------------------------------------------------------------------------------------
 
-    }
+  public Section() {
 
-    // ---------------------------------------------------------------------------------------------
+  }
 
-    public Section(int id, String name) {
-        this.id = id;
-        this.name = name;
-        this.color = "#000000";
-    }
+  // ---------------------------------------------------------------------------------------------
 
-    public Section(int id, String name, String color) {
-        this.id = id;
-        this.name = name;
-        this.color = color;
-    }
+  public Section(int id, String name) {
+    this.id = id;
+    this.name = name;
+    this.color = "#000000";
+  }
 
-    // ---------------------------------------------------------------------------------------------
+  public Section(int id, String name, String color) {
+    this.id = id;
+    this.name = name;
+    this.color = color;
+  }
 
-    public int getId() {
-        return id;
-    }
+  // ---------------------------------------------------------------------------------------------
 
-    // ---------------------------------------------------------------------------------------------
+  public int getId() {
+    return id;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  // ---------------------------------------------------------------------------------------------
 
-    // ---------------------------------------------------------------------------------------------
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  // ---------------------------------------------------------------------------------------------
 
-    // ---------------------------------------------------------------------------------------------
+  public String getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  // ---------------------------------------------------------------------------------------------
 
-    // ---------------------------------------------------------------------------------------------
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public String getColor() {
-        return color;
-    }
+  // ---------------------------------------------------------------------------------------------
 
-    // ---------------------------------------------------------------------------------------------
+  public String getColor() {
+    return color;
+  }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
+  // ---------------------------------------------------------------------------------------------
 
-    // ---------------------------------------------------------------------------------------------
+  public void setColor(String color) {
+    this.color = color;
+  }
 
-    @Override
-    public String toString() {
-        return "Section{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", color='" + color + '\'' +
-                '}';
-    }
+  // ---------------------------------------------------------------------------------------------
 
-    // ---------------------------------------------------------------------------------------------
+  @Override
+  public String toString() {
+    return "Section{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", color='" + color + '\'' +
+            '}';
+  }
+
+  // ---------------------------------------------------------------------------------------------
+
 }

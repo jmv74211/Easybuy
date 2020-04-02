@@ -2,10 +2,9 @@ package com.jmv74211.easybuy.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,16 +12,19 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.jmv74211.easybuy.R;
-import com.jmv74211.easybuy.adapters.CartAdapter;
 import com.jmv74211.easybuy.models.Cart;
-import com.jmv74211.easybuy.models.Product;
+import com.jmv74211.easybuy.adapters.CartAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class CartActivity extends AppCompatActivity implements CartAdapter.OnCardListener {
+public class CartActivity extends AppCompatActivity {
 
   private Toolbar appbar;
   private FloatingActionButton fab;
@@ -31,15 +33,18 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
   private Cart cart;
   private CartAdapter adapter;
 
+  private FirebaseFirestore db = FirebaseFirestore.getInstance();
+  private CollectionReference cartReference = db.collection("carts");
+
+  // -----------------------------------------------------------------------------------------------
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_cart);
 
-    appbar = (Toolbar) findViewById(R.id.app_bar);
+    appbar = findViewById(R.id.app_bar);
     fab = findViewById(R.id.fab);
-    recyclerView = findViewById(R.id.recyclerView);
     cartPriceText = findViewById(R.id.shoppingListNumberPrice);
 
     setSupportActionBar(appbar);
@@ -48,35 +53,81 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Toast.makeText(getApplicationContext(), String.valueOf(cart.getCartPrice()), Toast.LENGTH_SHORT).show();
-        System.out.println(cart);
+        Toast.makeText(getApplicationContext(), String.valueOf(cart.getCartPrice()),
+                Toast.LENGTH_SHORT).show();
       }
     });
 
-    Product p1 = new Product(1, "Mermelada de melocotón", 1.05f, "440g", 1);
-    Product p2 = new Product(2, "Leche semidesnatada", 0.58f, "1L", 1);
-
-    List<Pair<Product, Integer>> data = new ArrayList<>();
-    data.add(new Pair<Product, Integer>(p1, 1));
-    data.add(new Pair<Product, Integer>(p2, 1));
-
-    this.cart = new Cart(data);
-    cartPriceText.setText(String.valueOf(cart.getCartPrice()) + "€");
-
-    recyclerView.setHasFixedSize(true);
-
-    recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-    adapter = new CartAdapter(this, cart, this);
-
-    recyclerView.setAdapter(adapter);
+    setUpRecyclerView();
 
   }
+
+  // -----------------------------------------------------------------------------------------------
 
   @Override
-  public void onCardClick(int position) {
+  protected void onStart() {
+    super.onStart();
+    startListening();
 
   }
+
+  // -----------------------------------------------------------------------------------------------
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+  }
+
+  // -----------------------------------------------------------------------------------------------
+
+  private void setUpRecyclerView() {
+
+    this.adapter = new CartAdapter(this, cart);
+    recyclerView = findViewById(R.id.recyclerView);
+    recyclerView.setHasFixedSize(true); // performance reasons
+    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    recyclerView.setAdapter(adapter);
+  }
+
+  // -----------------------------------------------------------------------------------------------
+
+  private void loadData() {
+    System.out.println("Load data");
+
+    cartReference.get()
+            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+              @Override
+              public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                  cart = documentSnapshot.toObject(Cart.class);
+                  adapter.setCart(cart);
+                  adapter.notifyDataSetChanged();
+                }
+              }
+            });
+  }
+
+  // -----------------------------------------------------------------------------------------------
+
+  private void startListening() {
+    cartReference.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
+      @Override
+      public void onEvent(QuerySnapshot queryDocumentSnapshots, FirebaseFirestoreException e) {
+        if (e != null) {
+          return;
+        }
+        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+          cart = documentSnapshot.toObject(Cart.class);
+          adapter.setCart(cart);
+          adapter.notifyDataSetChanged();
+          cartPriceText.setText(String.valueOf(cart.getCartPrice()) +"€");
+        }
+      }
+    });
+  }
+
+  // -----------------------------------------------------------------------------------------------
 
 }
 

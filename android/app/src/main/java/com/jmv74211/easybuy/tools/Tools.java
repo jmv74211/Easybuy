@@ -5,6 +5,8 @@ import java.math.RoundingMode;
 
 public class Tools {
 
+  // -----------------------------------------------------------------------------------------------
+
   public static double round(double value, int places) {
     if (places < 0) throw new IllegalArgumentException();
 
@@ -12,5 +14,7 @@ public class Tools {
     bd = bd.setScale(places, RoundingMode.HALF_UP);
     return bd.doubleValue();
   }
+
+  // -----------------------------------------------------------------------------------------------
 
 }

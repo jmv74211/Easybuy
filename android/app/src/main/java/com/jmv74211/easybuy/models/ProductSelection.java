@@ -3,72 +3,70 @@ package com.jmv74211.easybuy.models;
 import com.jmv74211.easybuy.tools.Tools;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
+public class ProductSelection implements Serializable {
 
-public class Cart implements Serializable {
-
-  private List<ProductSelection> products = new ArrayList<ProductSelection>();
-
-  // -----------------------------------------------------------------------------------------------
-
-  public Cart() {}
+  private Product product;
+  private int quantity;
 
   // -----------------------------------------------------------------------------------------------
 
-  public Cart(List<ProductSelection> products) {
-    this.products = products;
+  public ProductSelection(){
+    this.product = new Product();
+    this.quantity = 0;
   }
 
   // -----------------------------------------------------------------------------------------------
 
-  public Cart(HashMap<String, Object> data) {
-    for(Object item: (ArrayList<Object>) data.get("products")){
-      this.addProduct(new ProductSelection((HashMap<String, Object>) item));
-    }
+  public ProductSelection(Product product, int quantity) {
+    this.product = product;
+    this.quantity = quantity;
   }
 
   // -----------------------------------------------------------------------------------------------
 
-  public List<ProductSelection> getProducts() {
-    return products;
+  public ProductSelection(Map<String, Object> data) {
+    this.product = new Product((HashMap<String, Object>) data.get("product"));
+    this.quantity = ((Long) data.get("quantity")).intValue();
   }
 
   // -----------------------------------------------------------------------------------------------
 
-  public void setProducts(List<ProductSelection> products) {
-    this.products = products;
+  public Product getProduct() {
+    return product;
   }
 
   // -----------------------------------------------------------------------------------------------
 
-  public float getCartPrice() {
-
-    float totalPrice = 0f;
-
-    for (ProductSelection p : products) {
-      totalPrice += p.getPrice();
-    }
-
-    return totalPrice;
+  public void setProduct(Product product) {
+    this.product = product;
   }
 
   // -----------------------------------------------------------------------------------------------
 
-  public void addProduct(ProductSelection p){
-    if(p != null){
-      this.products.add(p);
-    }
+  public int getQuantity() {
+    return quantity;
   }
+
+  // -----------------------------------------------------------------------------------------------
+
+  public void setQuantity(int quantity) {
+    this.quantity = quantity;
+  }
+
+  // -----------------------------------------------------------------------------------------------
+
+  public float getPrice(){ return (float) Tools.round((this.product.getPrice() * quantity), 2); }
 
   // -----------------------------------------------------------------------------------------------
 
   @Override
   public String toString() {
-    return "Cart{" +
-            "products=" + products +
+    return "ProductSelection{" +
+            "product=" + product +
+            ", quantity=" + quantity +
             '}';
   }
 
