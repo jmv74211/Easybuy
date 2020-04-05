@@ -14,12 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.jmv74211.easybuy.R;
 import com.jmv74211.easybuy.models.Cart;
 import com.jmv74211.easybuy.models.Product;
-
+import com.jmv74211.easybuy.tools.Tools;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
   private Context context;
-  private Cart cart = new Cart();
+  private Cart cart;
 
   // -----------------------------------------------------------------------------------------------
 
@@ -44,7 +44,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
   @Override
   public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-
     Product product = this.cart.getProducts().get(position).getProduct();
     int quantity = this.cart.getProducts().get(position).getQuantity();
 
@@ -60,9 +59,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
       holder.productImage.setImageResource(context.getResources().
               getIdentifier("product_unavailable", "drawable", context.getPackageName()));
 
-    holder.textPrice.setText(product.getPrice() * quantity + "€");
-
-
+    holder.textPrice.setText(Tools.round(product.getPrice(),2) * quantity + "€");
   }
 
   // -----------------------------------------------------------------------------------------------

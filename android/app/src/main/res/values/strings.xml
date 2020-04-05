@@ -8,6 +8,33 @@
     <string name="quantity">Cantidad</string>
     <string name="productDeletedSuccess">Producto eliminado!</string>
     <string name="productDeletedError">Error, el producto NO se ha eliminado, vuelve a intentarlo</string>
+    <string name="sections">Secciones</string>
+
+    <!-- SECTIONS -->
+    <string name="allProducts">Todos los productos</string>
+    <string name="dairy">Lácteos</string>
+    <string name="bakery">Panadería</string>
+    <string name="sweetsAndAssortments">Dulces y surtidos</string>
+    <string name="dressingsAndSauces">Aliños y salsas</string>
+    <string name="pulsesAndPasta">Legumbres y pasta</string>
+    <string name="meats">Carnes</string>
+    <string name="sausages">Embutidos</string>
+    <string name="fruitAndVegetables">Frutas y verduras</string>
+    <string name="frozen">Congelados</string>
+    <string name="fishes">Pescados</string>
+    <string name="drinks">Bebidas</string>
+    <string name="cleanlinessAndHygiene">Limpieza e higiene</string>
+    <string name="drugstore">Droguería</string>
+
+    <string name="chooseQuantity">Elige la cantidad</string>
+    <string name="addProducts">Añadir productos</string>
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+
+    <string name="productAddedSuccess">Producto añadido!</string>
+    <string name="productAddedError">Error, producto NO añadido, vuelve a intentarlo</string>
+
+    <!-- PRODUCTS -->
 
 
 </resources>

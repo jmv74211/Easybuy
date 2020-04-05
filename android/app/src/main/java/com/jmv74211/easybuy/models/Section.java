@@ -22,6 +22,8 @@ public class Section implements Serializable {
     this.color = "#000000";
   }
 
+  // ---------------------------------------------------------------------------------------------
+
   public Section(int id, String name, String color) {
     this.id = id;
     this.name = name;

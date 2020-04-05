@@ -1,5 +1,7 @@
 package com.jmv74211.easybuy.models;
 
+import com.jmv74211.easybuy.tools.Tools;
+
 import java.io.Serializable;
 import java.util.Map;
 
@@ -35,6 +37,16 @@ public class Product implements Serializable {
     this.section = ((Long) data.get("section")).intValue();
   }
 
+  // -----------------------------------------------------------------------------------------------
+
+  public Product(Product p) {
+    this.id = p.getId();
+    this.name = p.getName();
+    this.price = p.getPrice();
+    this.quantity = p.getQuantity();
+    this.section = p.getSection();
+  }
+
   // ---------------------------------------------------------------------------------------------
 
   public int getId() {
@@ -61,15 +73,11 @@ public class Product implements Serializable {
 
   // ---------------------------------------------------------------------------------------------
 
-  public float getPrice() {
-    return price;
-  }
+  public float getPrice() { return (float) Tools.round(price, 2); }
 
   // ---------------------------------------------------------------------------------------------
 
-  public void setPrice(float price) {
-    this.price = price;
-  }
+  public void setPrice(float price) { this.price = (float) Tools.round(price,2); }
 
   // ---------------------------------------------------------------------------------------------
 

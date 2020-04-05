@@ -58,7 +58,13 @@ public class ProductSelection implements Serializable {
 
   // -----------------------------------------------------------------------------------------------
 
-  public float getPrice(){ return (float) Tools.round((this.product.getPrice() * quantity), 2); }
+  public float calculatePrice(){ return (float) Tools.round((this.product.getPrice() * quantity), 2); }
+
+  // -----------------------------------------------------------------------------------------------
+
+  public void sumQuantity(int quantity){
+    this.quantity += quantity;
+  }
 
   // -----------------------------------------------------------------------------------------------
 
