@@ -4,8 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -27,8 +33,12 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.jmv74211.easybuy.R;
 import com.jmv74211.easybuy.data.CartData;
+import com.jmv74211.easybuy.data.Data;
+import com.jmv74211.easybuy.data.SettingsData;
+import com.jmv74211.easybuy.data.ThemeData;
 import com.jmv74211.easybuy.models.Cart;
 import com.jmv74211.easybuy.adapters.CartAdapter;
+import com.jmv74211.easybuy.tools.Theme;
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
 import java.util.HashMap;
@@ -50,25 +60,9 @@ public class CartActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    Data.getInstance(this).reloadData(); // load AppData
     setContentView(R.layout.activity_cart);
-
-    setWindowsStatusBarColor();
-
-    fab = findViewById(R.id.fab);
-    cartPriceText = findViewById(R.id.shoppingListNumberPrice);
-
-    setUpAppbar();
-
-    fab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        goToSectionActivity();
-      }
-    });
-
-    setUpRecyclerView();
-
-    setUpSwipeTouch();
+    setUpViews();
   }
 
   // -----------------------------------------------------------------------------------------------
@@ -88,61 +82,8 @@ public class CartActivity extends AppCompatActivity {
 
   // -----------------------------------------------------------------------------------------------
 
-  private void setUpRecyclerView() {
-    this.adapter = new CartAdapter(this, cart);
-    recyclerView = findViewById(R.id.recyclerView);
-    recyclerView.setHasFixedSize(true); // performance reasons
-    recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    recyclerView.setAdapter(adapter);
-  }
 
-  // -----------------------------------------------------------------------------------------------
-
-  private void loadData() {
-    cartReference.get()
-      .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-        @Override
-        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-          for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-            cart = documentSnapshot.toObject(Cart.class);
-            adapter.setCart(cart);
-            adapter.notifyDataSetChanged();
-          }
-        }
-      });
-  }
-
-  // -----------------------------------------------------------------------------------------------
-
-  private void startListening() {
-    cartReference.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
-      @Override
-      public void onEvent(QuerySnapshot queryDocumentSnapshots, FirebaseFirestoreException e) {
-        if (e != null) {
-          return;
-        }
-        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-          cart = documentSnapshot.toObject(Cart.class);
-          cart.setId(documentSnapshot.getId());
-          adapter.setCart(cart);
-          adapter.notifyDataSetChanged();
-          cartPriceText.setText(String.valueOf(cart.getCartPrice()) +"€");
-          CartData.getInstance().setCartData(cart);
-        }
-      }
-    });
-  }
-
-  // -----------------------------------------------------------------------------------------------
-
-  private void goToSectionActivity(){
-    Intent intent = new Intent(this, SectionActivity.class);
-    startActivity(intent);
-  }
-
-  // -----------------------------------------------------------------------------------------------
-
-  private void setUpSwipeTouch(){
+  private void setUpSwipeTouch() {
     ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,
             ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
       @Override
@@ -163,9 +104,135 @@ public class CartActivity extends AppCompatActivity {
 
   // -----------------------------------------------------------------------------------------------
 
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.settings_appbar, menu);
+    return true;
+  }
+
+  // -----------------------------------------------------------------------------------------------
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.settings:
+        goToSettingsActivity();
+        break;
+
+    }
+
+    return super.onOptionsItemSelected(item);
+  }
+
+  // -----------------------------------------------------------------------------------------------
+
+  private void startListening() {
+    cartReference.addSnapshotListener(this, new EventListener<QuerySnapshot>() {
+      @Override
+      public void onEvent(QuerySnapshot queryDocumentSnapshots, FirebaseFirestoreException e) {
+        if (e != null) {
+          return;
+        }
+        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+          cart = documentSnapshot.toObject(Cart.class);
+          cart.setId(documentSnapshot.getId());
+          CartData.getInstance(getApplicationContext()).setCartData(cart);
+          adapter.setCart(CartData.getInstance(getApplicationContext()).getCartData());
+          adapter.notifyDataSetChanged();
+          cartPriceText.setText(String.valueOf(cart.getCartPrice()) +
+                  SettingsData.getInstance(getApplicationContext()).getCurrency());
+        }
+      }
+    });
+  }
+
+  // -----------------------------------------------------------------------------------------------
+
+  private void setUpViews() {
+    setUpAppbar();
+
+    // SettingsData.getInstance(this).loadData();
+
+    setUpButtons();
+
+    setUpRecyclerView();
+
+    setUpSwipeTouch();
+  }
+
+  // -----------------------------------------------------------------------------------------------
+
+
+  private void setUpAppbar() {
+    Theme theme = ThemeData.getInstance(getApplicationContext()).
+            getTheme(SettingsData.getInstance(getApplicationContext()).getTheme());
+
+    appbar = findViewById(R.id.app_bar);
+
+    setSupportActionBar(appbar);
+    getSupportActionBar().setTitle(getResources().getString(R.string.productList));
+    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(
+            theme.getColorPrimary())));
+
+    if (Build.VERSION.SDK_INT >= 21) {
+      getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+      getWindow().setStatusBarColor(Color.parseColor(theme.getColorPrimaryDark()));
+    }
+  }
+
+
+  // -----------------------------------------------------------------------------------------------
+
+  private void setUpButtons() {
+    Theme theme = ThemeData.getInstance(getApplicationContext()).
+            getTheme(SettingsData.getInstance(getApplicationContext()).getTheme());
+    int colorAccent = Color.parseColor(theme.getColorAccent());
+
+    fab = findViewById(R.id.fab);
+    fab.setBackgroundTintList(ColorStateList.valueOf(colorAccent));
+    cartPriceText = findViewById(R.id.shoppingListNumberPrice);
+    cartPriceText.setTextColor(colorAccent);
+
+    fab.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        goToSectionActivity();
+      }
+    });
+  }
+
+  // -----------------------------------------------------------------------------------------------
+
+  private void setUpRecyclerView() {
+    this.adapter = new CartAdapter(this, cart);
+    recyclerView = findViewById(R.id.recyclerView);
+    recyclerView.setHasFixedSize(true); // performance reasons
+    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    recyclerView.setAdapter(adapter);
+  }
+
+  // -----------------------------------------------------------------------------------------------
+
+  private void loadData() {
+    cartReference.get()
+            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+              @Override
+              public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                  cart = documentSnapshot.toObject(Cart.class);
+                  adapter.setCart(cart);
+                  adapter.notifyDataSetChanged();
+                }
+              }
+            });
+  }
+
+  // -----------------------------------------------------------------------------------------------
+
   private void deleteItem(int position) {
     cart.getProducts().remove(position);
-    CartData.getInstance().setCartData(cart);
+    CartData.getInstance(getApplicationContext()).setCartData(cart);
 
     HashMap<String, Object> mapInformation = cart.toMap();
 
@@ -185,36 +252,35 @@ public class CartActivity extends AppCompatActivity {
 
   // -----------------------------------------------------------------------------------------------
 
-  private void successDeleteCartProduct(){
+  private void successDeleteCartProduct() {
     StyleableToast.makeText(this, this.getResources().getText(R.string.productDeletedSuccess).toString(),
-            Toast.LENGTH_LONG,R.style.toastSuccessAddProduct).show();
+            Toast.LENGTH_LONG, R.style.toastSuccessAddProduct).show();
   }
 
   // -----------------------------------------------------------------------------------------------
 
-  private void errorDeleteCartProduct(){
+  private void errorDeleteCartProduct() {
     StyleableToast.makeText(this, this.getResources().getText(R.string.productDeletedError).toString(),
-            Toast.LENGTH_LONG,R.style.toastErrorAddProduct).show();
+            Toast.LENGTH_LONG, R.style.toastErrorAddProduct).show();
   }
 
   // -----------------------------------------------------------------------------------------------
 
-  private void setUpAppbar(){
-    appbar = findViewById(R.id.app_bar);
-    setSupportActionBar(appbar);
-    getSupportActionBar().setTitle(getResources().getString(R.string.productList));
+
+  private void goToSectionActivity() {
+    Intent intent = new Intent(this, SectionActivity.class);
+    startActivity(intent);
   }
 
   // -----------------------------------------------------------------------------------------------
 
-  private void setWindowsStatusBarColor(){
-    if (Build.VERSION.SDK_INT >= 21) {
-      getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-      getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
-    }
+  private void goToSettingsActivity() {
+    Intent intent = new Intent(this, SettingsActivity.class);
+    startActivity(intent);
   }
 
   // -----------------------------------------------------------------------------------------------
+
 }
 
 

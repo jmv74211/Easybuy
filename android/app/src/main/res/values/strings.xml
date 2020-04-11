@@ -34,7 +34,136 @@
     <string name="productAddedSuccess">Producto añadido!</string>
     <string name="productAddedError">Error, producto NO añadido, vuelve a intentarlo</string>
 
+    <!-- SETINGS -->
+    <string name="euro">€</string>
+    <string name="dolar">$</string>
+    <string name="pounds">£</string>
+
+    <string name="settings">Ajustes</string>
+    <string name="chooseLanguage">Selecciona el idioma</string>
+    <string name="chooseCurrency">Selecciona la moneda</string>
+    <string name="applyChanges">Aplicar cambios</string>
+    <string name="spanish">Español</string>
+    <string name="english">Inglés</string>
+    <string name="changesSaved">Cambios guardados</string>
+    <string name="chooseTheme">Seleccione el tema</string>
+
+
+    <string-array name="currency">
+        <item>€</item>
+        <item>$</item>
+        <item>£</item>
+    </string-array>
+
     <!-- PRODUCTS -->
-
-
+    <string name="peachJam">Mermelada de melocotón</string>
+    <string name="semiSkimmedMilk">Leche semidesnatada</string>
+    <string name="margarineWithSalt">Margarina con sal</string>
+    <string name="naturalYogurts">Yogures naturales azúcar caña</string>
+    <string name="whiteBread">Pan blanco</string>
+    <string name="loafOfBread">Barra de pan</string>
+    <string name="sandwichBread">Bocadillos</string>
+    <string name="bigEggs">Huevos grandes</string>
+    <string name="breadWithTomato">Pan con tomate</string>
+    <string name="sugar">Azúcar</string>
+    <string name="mayonnaise">Mayonesa</string>
+    <string name="ketchup">Ketchup</string>
+    <string name="salt">Sal normal</string>
+    <string name="spaghetti">Spaghetti</string>
+    <string name="cookedChickpea">Garbanzo cocido</string>
+    <string name="lentilPardina">Lenteja pardina</string>
+    <string name="roundRice">Arroz redondo</string>
+    <string name="sunflowerOil">Aceite girasol</string>
+    <string name="burgers">Hamburguesas burguer vacuno cerdo</string>
+    <string name="mincedPorkMeat">Carne picada cerdo</string>
+    <string name="hindquarter">Cuarto trasero familiar</string>
+    <string name="chorizo">Chorizo oreado</string>
+    <string name="porkTacos">Cerdo a tacos</string>
+    <string name="veal">Vacuno a tacos</string>
+    <string name="foodColoring">Colorante alimentario</string>
+    <string name="bayLeaf">Laurel hoja</string>
+    <string name="serranoHam">Jamón serrano</string>
+    <string name="slicedCheese">Queso lonchas semicurado</string>
+    <string name="cheeseSausages">Salchichas frankfurt queso</string>
+    <string name="turkeyBreast">Pechuga de pavo</string>
+    <string name="pizzaBarbecue">Pizza barbacoa/bacon</string>
+    <string name="wedgeCheese">Queso cuña</string>
+    <string name="potatoOmelette">Tortilla patata</string>
+    <string name="baconStrips">Cintas de bacon</string>
+    <string name="chickenNoodleSoup">Sopa pollo fideos</string>
+    <string name="friedTomato">Tomate frito brick</string>
+    <string name="sweetCorn">Maíz dulce</string>
+    <string name="icebergLettuce">Lechuga iceberg</string>
+    <string name="canaryTomato">Tomate canario</string>
+    <string name="purpleGarlic">Ajo morado</string>
+    <string name="onion">Cebolla</string>
+    <string name="newPotato">Patata nueva</string>
+    <string name="leeks">Puerros</string>
+    <string name="muffins">Magdalenas</string>
+    <string name="cabbage">Repollo liso cortado</string>
+    <string name="rolledMushrooms">Champiñones laminados</string>
+    <string name="zucchini">Calabacín</string>
+    <string name="carrots">Zanahoria bolsa</string>
+    <string name="spinach">Espinacas</string>
+    <string name="chard">Acelgas</string>
+    <string name="pittedOlive">Aceituna con hueso</string>
+    <string name="cookingCream">Nata para cocinar</string>
+    <string name="lightTunaInOil">Atún claro aceite</string>
+    <string name="toiletPaper">Papel higiénico doble</string>
+    <string name="paperNapkins">Servilletas</string>
+    <string name="tissues">Pañuelos mentol</string>
+    <string name="airFreshener">Ambientador passion floral</string>
+    <string name="bleach">Lejía normal</string>
+    <string name="floorMop">Fregasuelos pino</string>
+    <string name="glassCleaner">Cristales multiusos</string>
+    <string name="rubbishBags">Bolsas de basura</string>
+    <string name="greenScouringPad">Estropajo verde</string>
+    <string name="dishwasher">Lavavajillas</string>
+    <string name="foil">Papel aluminio</string>
+    <string name="softener">Suavizante azul</string>
+    <string name="deodorantAloeVera">Rollon aloe vera</string>
+    <string name="deodorantSilk">Rollon seda</string>
+    <string name="toothpaste">Colgate triple acción</string>
+    <string name="antiDandruffShampoo">Champú anticaspa/grasa</string>
+    <string name="extraStrongGel">Gel extrafuerte</string>
+    <string name="antiBreakShampoo">Champú antirotura</string>
+    <string name="handCream">Crema manos aloe</string>
+    <string name="whiteBean">Alubia blanca</string>
+    <string name="chips">Patatas fritas salsa</string>
+    <string name="groundCoffee">Café molido natural</string>
+    <string name="watermelon">Sandía</string>
+    <string name="milkBread">Pan de leche</string>
+    <string name="mineralWater">Agua mineral</string>
+    <string name="colaZero">Cola zero</string>
+    <string name="showerGel">Gel-champú ducha</string>
+    <string name="squidsInAmericanSalsa">Calamar en salsa americana</string>
+    <string name="chickenCroquette">Croquetas de pollo</string>
+    <string name="trunks">Tronquitos</string>
+    <string name="melon">Melón</string>
+    <string name="greenPepper">Pimiento freír</string>
+    <string name="peaches">Bandeja de melocotones</string>
+    <string name="oranges">Naranjas</string>
+    <string name="pittedOlives">Aceitunas sin hueso</string>
+    <string name="riceWithVegetables">Arroz con verduras</string>
+    <string name="potatoStirFry">Salteado de patatas</string>
+    <string name="hamburgerBuns">Pan de hamburguesa</string>
+    <string name="orangeJuice">Zumo de naranja</string>
+    <string name="avocados">Aguacates</string>
+    <string name="turkeyDice">Dados de pavo</string>
+    <string name="mandarins">Mandarinas</string>
+    <string name="apples">Manzanas</string>
+    <string name="strawberries">Fresas</string>
+    <string name="quinceJelly">Carne de membrillo</string>
+    <string name="freshCheese">Quesitos de Burgos</string>
+    <string name="chops">Chuletas de aguja</string>
+    <string name="choppedRibs">Costillas troceadas</string>
+    <string name="bananas">Plátanos</string>
+    <string name="saladTomatoes">Tomates de ensalada</string>
+    <string name="tunaInBrine">Atún al natural</string>
+    <string name="lettuce">Cogotes de lechuga</string>
+    <string name="handSoap">Jabón de manos</string>
+    <string name="turkeyBologna">Mortadela de pavo</string>
+    <string name="cleanBathrooms">Limpiabaños</string>
+    <string name="crushedTomato">Tomate triturado</string>
+    <string name="chickenThighs">Pollo jamoncitos congelados</string>
 </resources>

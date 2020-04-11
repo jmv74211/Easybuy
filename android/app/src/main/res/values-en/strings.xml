@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Easybuy</string>
+
+    <string name="productList">Product list</string>
+    <string name="shoppingListCost">Shopping list cost</string>
+    <string name="search">Search</string>
+    <string name="productName">Product name</string>
+    <string name="quantity">Quantity</string>
+    <string name="productDeletedSuccess">Product deleted success!</string>
+    <string name="productDeletedError">Product delete error, try again</string>
+    <string name="sections">Sections</string>
+
+    <!-- SECTIONS -->
+    <string name="allProducts">All products</string>
+    <string name="dairy">Dairy</string>
+    <string name="bakery">Bakery</string>
+    <string name="sweetsAndAssortments">Sweets and assortments</string>
+    <string name="dressingsAndSauces">Dressings and sauces</string>
+    <string name="pulsesAndPasta">Pulses and pasta</string>
+    <string name="meats">Meats</string>
+    <string name="sausages">Sausages</string>
+    <string name="fruitAndVegetables">Fruit and vegetables</string>
+    <string name="frozen">Frozen</string>
+    <string name="fishes">Fishes</string>
+    <string name="drinks">Drinks</string>
+    <string name="cleanlinessAndHygiene">Cleanliness and hygiene</string>
+    <string name="drugstore">Drugstore</string>
+
+    <string name="chooseQuantity">Choose quantity</string>
+    <string name="addProducts">Add products</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="productAddedSuccess">Product added success!</string>
+    <string name="productAddedError">Product added error, try again</string>
+
+    <!-- SETINGS -->
+    <string name="euro">€</string>
+    <string name="dolar">$</string>
+    <string name="pounds">£</string>
+
+    <string name="settings">Settings</string>
+    <string name="chooseLanguage">Choose language</string>
+    <string name="chooseCurrency">Choose currency</string>
+    <string name="applyChanges">Aply changes</string>
+    <string name="spanish">Spanish</string>
+    <string name="english">English</string>
+    <string name="changesSaved">Changes saved</string>
+
+    <string name="chooseTheme">Choose theme</string>
+
+    <string-array name="currency">
+        <item>€</item>
+        <item>$</item>
+        <item>£</item>
+    </string-array>
+
+    <!-- PRODUCTS -->
+    <string name="peachJam">Peach jam</string>
+    <string name="semiSkimmedMilk">Semi skimmed milk</string>
+    <string name="margarineWithSalt">Margarine with salt</string>
+    <string name="naturalYogurts">Natural yogurts</string>
+    <string name="whiteBread">White bread</string>
+    <string name="loafOfBread">Loaf of bread</string>
+    <string name="sandwichBread">Sandwich bread</string>
+    <string name="bigEggs">Big eggs</string>
+    <string name="breadWithTomato">Bread with tomato</string>
+    <string name="sugar">Sugar</string>
+    <string name="mayonnaise">Mayonnaise</string>
+    <string name="ketchup">Ketchup</string>
+    <string name="salt">Salt</string>
+    <string name="spaghetti">Spaghetti</string>
+    <string name="cookedChickpea">Cooked chickpea</string>
+    <string name="lentilPardina">Lentil pardina</string>
+    <string name="roundRice">Round rice</string>
+    <string name="sunflowerOil">Sunflower oil</string>
+    <string name="burgers">Burgers</string>
+    <string name="mincedPorkMeat">Minced pork meat</string>
+    <string name="hindquarter">Hindquarter</string>
+    <string name="chorizo">Chorizo</string>
+    <string name="porkTacos">Pork tacos</string>
+    <string name="veal">Veal</string>
+    <string name="foodColoring">Food coloring</string>
+    <string name="bayLeaf">Bay leaf</string>
+    <string name="serranoHam">Serrano ham</string>
+    <string name="slicedCheese">Aliced cheese</string>
+    <string name="cheeseSausages">Cheese sausages</string>
+    <string name="turkeyBreast">Turkey breast</string>
+    <string name="pizzaBarbecue">Pizza barbecue</string>
+    <string name="wedgeCheese">Wedge cheese</string>
+    <string name="potatoOmelette">Potato omelette</string>
+    <string name="baconStrips">Bacon strips</string>
+    <string name="chickenNoodleSoup">Chicken noodle soup</string>
+    <string name="friedTomato">Fried tomato</string>
+    <string name="sweetCorn">Sweet corn</string>
+    <string name="icebergLettuce">Iceberg lettuce</string>
+    <string name="canaryTomato">Canary tomato</string>
+    <string name="purpleGarlic">Purple garlic</string>
+    <string name="onion">Onion</string>
+    <string name="newPotato">New potato</string>
+    <string name="leeks">Leeks</string>
+    <string name="muffins">Muffins</string>
+    <string name="cabbage">Cabbage</string>
+    <string name="rolledMushrooms">Rolled mushrooms</string>
+    <string name="zucchini">Zucchini</string>
+    <string name="carrots">Carrots</string>
+    <string name="spinach">Spinach</string>
+    <string name="chard">Chard</string>
+    <string name="pittedOlive">Pitted olive</string>
+    <string name="cookingCream">Cooking cream</string>
+    <string name="lightTunaInOil">Light tuna in oil</string>
+    <string name="toiletPaper">Toilet paper</string>
+    <string name="paperNapkins">Paper napkins</string>
+    <string name="tissues">Tissues</string>
+    <string name="airFreshener">Air freshener</string>
+    <string name="bleach">Bleach</string>
+    <string name="floorMop">Floor mop</string>
+    <string name="glassCleaner">Glass cleaner</string>
+    <string name="rubbishBags">Rubbish bags</string>
+    <string name="greenScouringPad">Green scouring pad</string>
+    <string name="dishwasher">Dishwasher</string>
+    <string name="foil">Foil</string>
+    <string name="softener">Softener</string>
+    <string name="deodorantAloeVera">Aloevera Deodorant</string>
+    <string name="deodorantSilk">Silk Deodorant</string>
+    <string name="toothpaste">Toothpaste</string>
+    <string name="antiDandruffShampoo">Antidandruff shampoo</string>
+    <string name="extraStrongGel">Extra strong gel</string>
+    <string name="antiBreakShampoo">Anti break shampoo</string>
+    <string name="handCream">Handcream</string>
+    <string name="whiteBean">White bean</string>
+    <string name="chips">Chips</string>
+    <string name="groundCoffee">Ground coffee</string>
+    <string name="watermelon">Watermelon</string>
+    <string name="milkBread">Milk bread</string>
+    <string name="mineralWater">Mineral water</string>
+    <string name="colaZero">Cola zero</string>
+    <string name="showerGel">Shower gel</string>
+    <string name="squidsInAmericanSalsa">Squids in american salsa</string>
+    <string name="chickenCroquette">Chicken croquette</string>
+    <string name="trunks">Trunks</string>
+    <string name="melon">Melon</string>
+    <string name="greenPepper">Green pepper</string>
+    <string name="peaches">Peaches</string>
+    <string name="oranges">Oranges</string>
+    <string name="pittedOlives">Pitted olives</string>
+    <string name="riceWithVegetables">Rice with vegetables</string>
+    <string name="potatoStirFry">Potato stir fry</string>
+    <string name="hamburgerBuns">Hamburger buns</string>
+    <string name="orangeJuice">Orange juice</string>
+    <string name="avocados">Avocados</string>
+    <string name="turkeyDice">Turkey dice</string>
+    <string name="mandarins">Mandarins</string>
+    <string name="apples">Apples</string>
+    <string name="strawberries">Strawberries</string>
+    <string name="quinceJelly">Quince jelly</string>
+    <string name="freshCheese">Fresh cheese</string>
+    <string name="chops">Chops</string>
+    <string name="choppedRibs">Chopped ribs</string>
+    <string name="bananas">Bananas</string>
+    <string name="saladTomatoes">Salad tomatoes</string>
+    <string name="tunaInBrine">Tuna in brine</string>
+    <string name="lettuce">Lettuce</string>
+    <string name="handSoap">Hand soap</string>
+    <string name="turkeyBologna">Turkey bologna</string>
+    <string name="cleanBathrooms">Clean bathrooms</string>
+    <string name="crushedTomato">Crushed tomato</string>
+    <string name="chickenThighs">Chicken thighs</string>
+
+</resources>

@@ -20,9 +20,7 @@ import java.util.HashMap;
 public class SectionActivity extends AppCompatActivity implements SectionAdapter.OnCardListener {
 
   private RecyclerView recyclerView;
-
   private SectionAdapter adapter;
-
   private ArrayList<Section> sectionList;
 
   // -----------------------------------------------------------------------------------------------
@@ -31,9 +29,15 @@ public class SectionActivity extends AppCompatActivity implements SectionAdapter
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_section);
-    setWindowsStatusBarColor();
     loadData();
-    setUpRecyclerView();
+    setUpViews();
+  }
+
+  // -----------------------------------------------------------------------------------------------
+
+  @Override
+  public void onCardClick(int position) {
+    goToProductSearchActivity(position);
   }
 
   // -----------------------------------------------------------------------------------------------
@@ -41,6 +45,13 @@ public class SectionActivity extends AppCompatActivity implements SectionAdapter
   private void loadData(){
     SectionData sectionData = SectionData.getInstance(this);
     sectionList = sectionData.getSectionData();
+  }
+
+  // -----------------------------------------------------------------------------------------------
+
+  private void setUpViews() {
+    setWindowsStatusBarColor();
+    setUpRecyclerView();
   }
 
   // -----------------------------------------------------------------------------------------------
@@ -60,9 +71,11 @@ public class SectionActivity extends AppCompatActivity implements SectionAdapter
 
   // -----------------------------------------------------------------------------------------------
 
-  @Override
-  public void onCardClick(int position) {
-    goToProductSearchActivity(position);
+  private void setWindowsStatusBarColor() {
+    if (Build.VERSION.SDK_INT >= 21) {
+      getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+      getWindow().setStatusBarColor(getResources().getColor(R.color.cdarkBLue));
+    }
   }
 
   // -----------------------------------------------------------------------------------------------
@@ -73,15 +86,6 @@ public class SectionActivity extends AppCompatActivity implements SectionAdapter
     data.put("sectionId", sectionId);
     intent.putExtra("hashMap", data);
     startActivity(intent);
-  }
-
-  // -----------------------------------------------------------------------------------------------
-
-  private void setWindowsStatusBarColor(){
-    if (Build.VERSION.SDK_INT >= 21) {
-      getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-      getWindow().setStatusBarColor(getResources().getColor(R.color.cdarkBLue));
-    }
   }
 
   // -----------------------------------------------------------------------------------------------

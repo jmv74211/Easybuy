@@ -1,6 +1,7 @@
 package com.jmv74211.easybuy.models;
 
 import com.google.firebase.firestore.Exclude;
+import com.jmv74211.easybuy.tools.Tools;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class Cart implements Serializable {
       totalPrice += p.calculatePrice();
     }
 
-    return totalPrice;
+    return (float) Tools.round(totalPrice,2);
   }
 
   // -----------------------------------------------------------------------------------------------

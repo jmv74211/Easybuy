@@ -1,6 +1,7 @@
 package com.jmv74211.easybuy.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jmv74211.easybuy.R;
+import com.jmv74211.easybuy.data.SettingsData;
+import com.jmv74211.easybuy.data.ThemeData;
 import com.jmv74211.easybuy.models.Product;
+import com.jmv74211.easybuy.tools.Theme;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +32,7 @@ public class ProductSearchAdapter extends RecyclerView.Adapter<ProductSearchAdap
 
    // -----------------------------------------------------------------------------------------------
 
-  public ProductSearchAdapter(Context context, ArrayList<Product> productList, OnCardListener onCardListener) {
+   public ProductSearchAdapter(Context context, ArrayList<Product> productList, OnCardListener onCardListener) {
     this.context = context;
     this.products = productList;
     this.onCardListener = onCardListener;
@@ -53,9 +57,11 @@ public class ProductSearchAdapter extends RecyclerView.Adapter<ProductSearchAdap
    public void onBindViewHolder(@NonNull ProductSearchViewHolder holder, int position) {
      Product product = this.products.get(position);
      String quantity = product.getQuantity();
+     Theme theme = ThemeData.getInstance(context).getTheme(SettingsData.getInstance(context).getTheme());
 
      holder.textProductName.setText(product.getName());
      holder.textQuantity.setText(": " + quantity);
+     holder.textQuantity.setTextColor(Color.parseColor(theme.getColorPrimaryDark()));
 
      int resourceId = context.getResources().getIdentifier("product_" +
              String.valueOf(product.getId()), "drawable", context.getPackageName());
@@ -66,7 +72,8 @@ public class ProductSearchAdapter extends RecyclerView.Adapter<ProductSearchAdap
        holder.productImage.setImageResource(context.getResources().
                getIdentifier("product_unavailable", "drawable", context.getPackageName()));
 
-     holder.textPrice.setText(product.getPrice() + "€");
+     holder.textPrice.setText(product.getPrice() + SettingsData.getInstance(context).getCurrency());
+     holder.textPrice.setTextColor(Color.parseColor(theme.getColorAccent()));
    }
 
    // -----------------------------------------------------------------------------------------------

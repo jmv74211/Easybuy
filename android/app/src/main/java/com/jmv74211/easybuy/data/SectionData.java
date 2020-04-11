@@ -17,7 +17,6 @@ public class SectionData {
   // -----------------------------------------------------------------------------------------------
 
   private SectionData(Context context) {
-
     this.context = context;
     String color = "#000000";
 
@@ -44,7 +43,6 @@ public class SectionData {
   // -----------------------------------------------------------------------------------------------
 
   public static SectionData getInstance(Context context) {
-
     if (instance == null)
       instance = new SectionData(context);
 
@@ -60,56 +58,18 @@ public class SectionData {
   // -----------------------------------------------------------------------------------------------
 
   public String getSection(int key) {
-
-    String section = "";
-
-    switch (key) {
-
-      case 0:
-        section = context.getResources().getString(R.string.allProducts);
-        break;
-      case 1:
-        section = context.getResources().getString(R.string.dairy);
-        break;
-      case 2:
-        section = context.getResources().getString(R.string.bakery);
-        break;
-      case 3:
-        section = context.getResources().getString(R.string.sweetsAndAssortments);
-        break;
-      case 4:
-        section = context.getResources().getString(R.string.dressingsAndSauces);
-        break;
-      case 5:
-        section = context.getResources().getString(R.string.pulsesAndPasta);
-        break;
-      case 6:
-        section = context.getResources().getString(R.string.meats);
-        break;
-      case 7:
-        section = context.getResources().getString(R.string.sausages);
-        break;
-      case 8:
-        section = context.getResources().getString(R.string.fruitAndVegetables);
-        break;
-      case 9:
-        section = context.getResources().getString(R.string.frozen);
-        break;
-      case 10:
-        section = context.getResources().getString(R.string.fishes);
-        break;
-      case 11:
-        section = context.getResources().getString(R.string.drinks);
-        break;
-      case 12:
-        section = context.getResources().getString(R.string.cleanlinessAndHygiene);
-        break;
-      case 13:
-        section = context.getResources().getString(R.string.drugstore);
-        break;
+    if(key >= sectionList.size()){
+      return sectionList.get(0).getName();
     }
 
-    return section;
+    return sectionList.get(key).getName();
+  }
+
+  // -----------------------------------------------------------------------------------------------
+
+  public void reloadData(Context context){
+    instance = null;
+    instance = getInstance(context);
   }
 
   // -----------------------------------------------------------------------------------------------
