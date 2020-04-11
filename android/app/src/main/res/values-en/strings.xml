@@ -7,7 +7,7 @@
     <string name="search">Search</string>
     <string name="productName">Product name</string>
     <string name="quantity">Quantity</string>
-    <string name="productDeletedSuccess">Product deleted success!</string>
+    <string name="productDeletedSuccess">Product deleted successfully</string>
     <string name="productDeletedError">Product delete error, try again</string>
     <string name="sections">Sections</string>
 
@@ -32,8 +32,8 @@
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
 
-    <string name="productAddedSuccess">Product added success!</string>
-    <string name="productAddedError">Product added error, try again</string>
+    <string name="productAddedSuccess">Product added successfully!</string>
+    <string name="productAddedError">Error, could not add the product, try again</string>
 
     <!-- SETINGS -->
     <string name="euro">€</string>
