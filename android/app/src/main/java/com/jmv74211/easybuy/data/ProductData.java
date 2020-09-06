@@ -128,7 +128,12 @@ public class ProductData {
             new Product(107,context.getResources().getString(R.string.turkeyBologna), 1.19f, "1U", 7),
             new Product(108,context.getResources().getString(R.string.cleanBathrooms), 1.3f, "1U", 12),
             new Product(109,context.getResources().getString(R.string.crushedTomato), 0.74f, "1U", 4),
-            new Product(110,context.getResources().getString(R.string.chickenThighs), 2.75f, "1U", 6)
+            new Product(110,context.getResources().getString(R.string.chickenThighs), 2.75f, "1U", 6),
+            new Product(111,context.getResources().getString(R.string.salmorejo), 1.85f, "3U",11 ),
+            new Product(112,context.getResources().getString(R.string.sauteedVegetables), 1.40f, "1U", 9),
+            new Product(113,context.getResources().getString(R.string.almondMinibombon), 2f, "1U", 3),
+            new Product(114,context.getResources().getString(R.string.supersandwichCream), 2.1f, "1U", 3),
+            new Product(115,context.getResources().getString(R.string.paellaPrepared), 4.14f, "1U", 9)
       )
     );
   }

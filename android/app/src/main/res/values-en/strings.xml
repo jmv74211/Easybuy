@@ -167,5 +167,9 @@
     <string name="cleanBathrooms">Clean bathrooms</string>
     <string name="crushedTomato">Crushed tomato</string>
     <string name="chickenThighs">Chicken thighs</string>
-
+    <string name="salmorejo">Salmorejo</string>
+    <string name="sauteedVegetables">Sauteed vegetables</string>
+    <string name="almondMinibombon">Almond minibombon</string>
+    <string name="supersandwichCream">Supersandwich cream</string>
+    <string name="paellaPrepared">Paella prepared</string>
 </resources>

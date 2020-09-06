@@ -166,4 +166,9 @@
     <string name="cleanBathrooms">Limpiabaños</string>
     <string name="crushedTomato">Tomate triturado</string>
     <string name="chickenThighs">Pollo jamoncitos congelados</string>
+    <string name="salmorejo">Salmorejo</string>
+    <string name="sauteedVegetables">Salteado de verduras</string>
+    <string name="almondMinibombon">Minibombón almendrado</string>
+    <string name="supersandwichCream">Supersandwich nata</string>
+    <string name="paellaPrepared">Preparado de paella</string>
 </resources>
